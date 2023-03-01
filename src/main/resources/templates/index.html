@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+
+    <h3 th:inline="text">Dear [[${#httpServletRequest.remoteUser}]] ,</h3>
+    <h3 th:inline="text">Welcome in our online hospital!</h3>
+    <br/>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+    <br/>
+    <br/>
+
+    <h2>Menu</h2>
+    <br/>
+    <li>
+        <a href="/patient/show">Show all patients</a>
+    </li>
+    <br/>
+    <li>
+        <a href="/doctor/show">Show all doctors</a>
+    </li>
+
+</body>
+</html>

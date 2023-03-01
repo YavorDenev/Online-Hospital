@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
+<head>
+    <meta charset="UTF-8">
+    <title>Patients list</title>
+</head>
+<body>
+    <h1>Patients list</h1>
+
+<!--    <br/>-->
+<!--    <a th:href="@{/patient/create}">Add new patient</a>-->
+
+    <p></p>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>age</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="xxx : ${patientList}">
+            <td th:text="${xxx.id}"></td>
+            <td th:text="${xxx.firstName}"></td>
+            <td th:text="${xxx.lastName}"></td>
+            <td th:text="${xxx.age}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    </p>
+    <a th:href="@{/}">Back to main menu</a>
+
+</body>
+</html>
