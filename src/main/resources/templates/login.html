@@ -6,12 +6,15 @@
 </head>
 <body>
 
+<h3 th:inline="text">Welcome in our online hospital!</h3>
+<br/>
+
 <form th:action="@{/login}" method="POST" class="form-signin">
     <h2 th:text="Login"></h2><br />
-    <input type="text" name="username" th:placeholder="username" /> <br /><br />
-    <input type="password" th:placeholder="Password" name="password" /> <br /><br /><br />
+    <p>Username: <input type="text" name="username" th:placeholder="Username"/></p>    <br />
+    <p>Password: <input type="password" name="password" th:placeholder="Password"/></p>     <br /><br />
     <button type="Submit" th:text="Login"></button><br /><br /><br />
-    <a th:href="@{/register}">Register</a><br /><br />
+    <a th:href="@{/register-patient}">Register as new patient</a><br /><br />
     <div th:if="${param.error}"><p>Username or Password is invalid.</p></div> <br />
 </form>
 </body>

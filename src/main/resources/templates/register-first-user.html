@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register first user</title>
+</head>
+<body>
+<form th:action="@{/register-first-user}" th:object="${user}" method="post">
+    <h2>Register first user</h2><br/>
+
+    <p>Username:
+        <input type="text" th:field="*{username}" placeholder="Username" minlength="5" maxlength="30" required/>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red">username error</span>
+    </p><br/>
+
+    <p>Password:
+        <input type="password" th:field="*{password}" placeholder="Password" minlength="5" maxlength="30" required/>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red">password error</span><br/><br/>
+    </p><br/>
+
+    <p>Select role:
+        <select th:field="*{role}" required>
+            <option value="">Select</option>
+            <option value="ROLE_PATIENT">ROLE_PATIENT</option>
+            <option value="ROLE_DOCTOR">ROLE_DOCTOR</option>
+            <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+        </select>
+    </p><br/>
+
+    <button type="submit">Register</button><br/><br/>
+    <a th:href="@{|/login|}" th:text="'Log in'"></a><br/><br/>
+    <span th:utext="${successMessage}"></span>
+</form>
+</body>
+</html>

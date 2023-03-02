@@ -42,8 +42,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/login", "/register").permitAll()
+                .mvcMatchers("/login", "/register-first-user", "/register-patient").permitAll()
+                .mvcMatchers("/register-doctor", "/register-admin").hasAnyAuthority("ROLE_ADMIN")
+
                 .anyRequest().hasAnyAuthority("ROLE_PATIENT", "ROLE_DOCTOR", "ROLE_ADMIN")
+
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()

@@ -20,6 +20,9 @@ public class User {
     @Column(length = 30, nullable = false)
     private String username;
 
+    @NotNull
+    @Size(min=5, max=100)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)

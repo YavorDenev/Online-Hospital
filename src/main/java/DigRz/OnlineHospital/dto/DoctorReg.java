@@ -1,19 +1,16 @@
-package DigRz.OnlineHospital.entities;
+package DigRz.OnlineHospital.dto;
 
 import DigRz.OnlineHospital.constants.Specialty;
+import org.springframework.stereotype.Service;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name="doctors")
-public class Doctor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, columnDefinition = "INT(11) UNSIGNED")
-    private Long id;
+@Service
+public class DoctorReg {
 
     @NotNull
     @Size(min=2, max=30)
@@ -30,18 +27,15 @@ public class Doctor {
     private String specialty;
 
     @NotNull
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    User user;
+    @Size(min=5, max=30)
+    @Column(length = 30, nullable = false)
+    private String username;
 
+    @NotNull
+    @Size(min=5, max=100)
+    @Column(length = 100, nullable = false)
+    private String password;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -67,12 +61,19 @@ public class Doctor {
         this.specialty = specialty;
     }
 
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

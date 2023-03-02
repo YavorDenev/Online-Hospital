@@ -1,6 +1,9 @@
 package DigRz.OnlineHospital.services;
 
 import DigRz.OnlineHospital.config.MyUserDetails;
+import DigRz.OnlineHospital.constants.Role;
+import DigRz.OnlineHospital.dto.DoctorReg;
+import DigRz.OnlineHospital.dto.PatientReg;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +26,48 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setEnabled(true);
-//        user.setRole(Role.ROLE_PATIENT);
         userRepo.save(user);
     }
 
-    public Boolean isUserExist(User user) {
-        User u = userRepo.getUserByUsername(user.getUsername());
+    public void saveUserAsAdmin(User user) {
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setEnabled(true);
+        user.setRole(Role.ROLE_ADMIN);
+        userRepo.save(user);
+    }
+
+    public void saveUserAsPatient(PatientReg patientReg) {
+        User user = new User();
+        String encodedPassword = bCryptPasswordEncoder.encode(patientReg.getPassword());
+        user.setPassword(encodedPassword);
+        user.setUsername(patientReg.getUsername());
+        user.setEnabled(true);
+        user.setRole(Role.ROLE_PATIENT);
+        userRepo.save(user);
+    }
+
+    public void saveUserAsDoctor(DoctorReg doctorReg) {
+        User user = new User();
+        String encodedPassword = bCryptPasswordEncoder.encode(doctorReg.getPassword());
+        user.setPassword(encodedPassword);
+        user.setUsername(doctorReg.getUsername());
+        user.setEnabled(true);
+        user.setRole(Role.ROLE_DOCTOR);
+        userRepo.save(user);
+    }
+
+
+    public Boolean isUserExist(String username) {
+        User u = userRepo.getUserByUsername(username);
         return (u != null);
     }
+
+//    public Boolean isPatientExist(PatientReg patientReg) {
+//        User u = userRepo.getUserByUsername(patientReg.getUsername());
+//        return (u != null);
+//    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,5 +77,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return new MyUserDetails(user);
     }
+
 
 }
