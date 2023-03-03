@@ -1,11 +1,8 @@
 package DigRz.OnlineHospital.dto;
 
-import DigRz.OnlineHospital.constants.Specialty;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

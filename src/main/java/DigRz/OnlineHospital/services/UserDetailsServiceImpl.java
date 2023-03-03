@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRepository userRepo;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void saveUser(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
@@ -62,11 +62,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User u = userRepo.getUserByUsername(username);
         return (u != null);
     }
-
-//    public Boolean isPatientExist(PatientReg patientReg) {
-//        User u = userRepo.getUserByUsername(patientReg.getUsername());
-//        return (u != null);
-//    }
 
 
     @Override

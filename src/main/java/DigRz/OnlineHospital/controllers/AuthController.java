@@ -21,10 +21,10 @@ public class AuthController {
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    PatientService patientService;
+    private PatientService patientService;
 
     @Autowired
-    DoctorService doctorService;
+    private DoctorService doctorService;
 
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)

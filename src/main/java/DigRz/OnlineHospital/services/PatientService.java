@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class PatientService {
 
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public void savePatient(PatientReg patientReg) {
         Patient patient = new Patient();

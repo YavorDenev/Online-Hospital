@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DoctorController {
 
     @Autowired
-    DoctorRepository doctorRepository;
+    private DoctorRepository doctorRepository;
 
     @GetMapping("/show")
     private String showDoctors (Model m) {

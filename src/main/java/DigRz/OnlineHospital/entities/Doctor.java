@@ -1,7 +1,5 @@
 package DigRz.OnlineHospital.entities;
 
-import DigRz.OnlineHospital.constants.Specialty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
