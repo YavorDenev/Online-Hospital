@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Create New Hotel</h1>
+<form action="#" th:action="@{/appointment/submit}" method="post" th:object="${appointment}">
+  <p>Doctor:
+    <select th:field="*{doctor}">
+      <option th:each="d : ${doctors}"
+              th:value="${d.id}"
+              th:text="${d.firstName} + ' ' + ${d.lastName} + ': ' + ${d.specialty}">
+      </option>
+    </select>
+  </p>
+
+    <p>Examination:
+        <select th:field="*{examination}">
+            <option th:each="e : ${examinationList}"
+                    th:value="${e.value}"
+                    th:text="${e.value}">
+            </option>
+        </select>
+    </p>
+<!--    <p>Name: <input type="text" th:field="*{date}" required></p>-->
+<p>Day:
+   <select th:field="*{myDate}">
+       <option th:each="a : ${days}"
+              th:value="${a}"
+              th:text="${a}">
+      </option>
+
+    </select>
+  </p>
+  <p>Hour:
+    <select th:field="*{myTime}">
+     <option th:each="h : ${hours}"
+              th:value="${h}"
+              th:text="${h}">
+      </option>
+    </select>
+  </p>
+
+
+
+  <p><input type="submit" value="Save appointment"></p>
+</form>
+</body>
+</html>
