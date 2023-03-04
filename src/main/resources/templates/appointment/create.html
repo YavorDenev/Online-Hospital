@@ -15,23 +15,31 @@
       </option>
     </select>
   </p>
+
+    <p>Examination:
+        <select th:field="*{examination}">
+            <option th:each="e : ${examinationList}"
+                    th:value="${e.value}"
+                    th:text="${e.value}">
+            </option>
+        </select>
+    </p>
 <!--    <p>Name: <input type="text" th:field="*{date}" required></p>-->
 <p>Day:
-   <select th:field="*{date1}">
-
-    <!--<option th:each="a : ${days}"
+   <select th:field="*{myDate}">
+       <option th:each="a : ${days}"
               th:value="${a}"
               th:text="${a}">
-      </option>-->
+      </option>
 
     </select>
   </p>
   <p>Hour:
-    <select th:field="*{time}">
-     <!-- <option th:each="h : ${hours}"
+    <select th:field="*{myTime}">
+     <option th:each="h : ${hours}"
               th:value="${h}"
               th:text="${h}">
-      </option>-->
+      </option>
     </select>
   </p>
 

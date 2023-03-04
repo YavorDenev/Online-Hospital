@@ -4,7 +4,6 @@ import DigRz.OnlineHospital.constants.Examination;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -15,7 +14,7 @@ public class Appointment {
         @Column(name = "id", nullable = false, columnDefinition = "INT(11) UNSIGNED")
         private Long id;
 
-        @NotNull
+        //@NotNull
         @ManyToOne
         @JoinColumn(name = "patient_id", nullable = false)
         Patient patient;
@@ -26,14 +25,14 @@ public class Appointment {
         Doctor doctor;
 
         @NotNull
-        @Enumerated(EnumType.STRING)
-        private Examination examination;
+        @Column(length = 100, nullable = false)
+        private String examination;
         @NotNull
        // @Column(name = "date", nullable = false, columnDefinition = "DATE")
-        private LocalDate date1;
+        private String myDate;
         @NotNull
         @Column(name = "time", nullable = false, columnDefinition = "TIME")
-        private LocalTime time;
+        private String myTime;
 
         public Long getId() {
                 return id;
@@ -59,28 +58,27 @@ public class Appointment {
                 this.doctor = doctor;
         }
 
-        public Examination getExamination() {
+        public String getExamination() {
                 return examination;
         }
 
-        public void setExamination(Examination examination) {
+        public void setExamination(String examination) {
                 this.examination = examination;
         }
 
-        public LocalDate getDate1() {
-                return date1;
+        public String getMyDate() {
+                return myDate;
         }
 
-        public void setDate1(LocalDate date1) {
-                this.date1 = date1;
+        public void setMyDate(String myDate) {
+                this.myDate = myDate;
         }
 
-        public LocalTime getTime() {
-                return time;
+        public String getMyTime() {
+                return myTime;
         }
 
-        public void setTime(LocalTime time) {
-                this.time = time;
+        public void setMyTime(String myTime) {
+                this.myTime = myTime;
         }
-
-    }
+}
