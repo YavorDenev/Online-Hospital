@@ -28,7 +28,7 @@ public class Appointment {
         @Column(length = 100, nullable = false)
         private String examination;
         @NotNull
-       // @Column(name = "date", nullable = false, columnDefinition = "DATE")
+        @Column(name = "date", nullable = false, columnDefinition = "DATE")
         private String myDate;
         @NotNull
         @Column(name = "time", nullable = false, columnDefinition = "TIME")
