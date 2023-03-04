@@ -1,10 +1,7 @@
 package DigRz.OnlineHospital.entities;
 
-import DigRz.OnlineHospital.constants.Examination;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalTime;
 
 @Entity
 @Table(name="appointments")

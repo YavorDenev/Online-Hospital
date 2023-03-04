@@ -37,13 +37,15 @@ public class AppointmentController {
     private UserRepository userRepository;
     @Autowired
     private AppointmentService appointmentService;
+
     @GetMapping("/show")
     private String showPatientAppointments (Model m) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        //User user = userRepository.getUserByUsername((auth.getName()));
-        Long id = userRepository.getUserByUsername((auth.getName())).getId();
-        Patient patient = patientRepository.findById(id).get();
+        //TODO
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.getUserByUsername((auth.getName()));
+        Patient patient = patientRepository.findByUser(user);
+        //TODO
 
         m.addAttribute("appointmentList", appointmentRepository.findByPatient(patient));
         return "appointment/list";

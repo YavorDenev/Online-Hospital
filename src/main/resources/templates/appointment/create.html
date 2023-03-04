@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create New Appointment</title>
 </head>
 <body>
-<h1>Create New Hotel</h1>
+<h1>Create New Appointment</h1>
+
 <form action="#" th:action="@{/appointment/submit}" method="post" th:object="${appointment}">
+
   <p>Doctor:
     <select th:field="*{doctor}">
       <option th:each="d : ${doctors}"
@@ -24,7 +26,7 @@
             </option>
         </select>
     </p>
-<!--    <p>Name: <input type="text" th:field="*{date}" required></p>-->
+
 <p>Day:
    <select th:field="*{myDate}">
        <option th:each="a : ${days}"
@@ -42,8 +44,6 @@
       </option>
     </select>
   </p>
-
-
 
   <p><input type="submit" value="Save appointment"></p>
 </form>

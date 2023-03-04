@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class Utils {
+
     public List<LocalDate> generateListOfDays() {
         LocalDate startDay = LocalDate.now().plusDays(15);
         List<LocalDate> daysList = new ArrayList<>();
@@ -16,14 +18,7 @@ public class Utils {
         }
         return daysList;
     }
-   /* public List<String> generateListOfDays() {
-        LocalDate startDay = LocalDate.now().plusDays(15);
-        List<String> daysList = new ArrayList<>();
-        for (int i = 0; i < 14; i++) {     //за две седмици
-            daysList.add(startDay.plusDays(i).toString());
-        }
-        return daysList;
-    }*/
+
     public List generateListOfHours() {
         LocalTime startHour = LocalTime.of(9,0);
         List<LocalTime> hoursList = new ArrayList<>();
@@ -32,4 +27,5 @@ public class Utils {
         }
         return hoursList;
     }
+
 }
