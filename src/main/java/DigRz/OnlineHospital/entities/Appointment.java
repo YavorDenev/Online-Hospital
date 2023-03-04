@@ -4,8 +4,8 @@ import DigRz.OnlineHospital.constants.Examination;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="appointments")
@@ -28,8 +28,59 @@ public class Appointment {
         @NotNull
         @Enumerated(EnumType.STRING)
         private Examination examination;
-
         @NotNull
-        @Column
-        private LocalDateTime dateTime;
+       // @Column(name = "date", nullable = false, columnDefinition = "DATE")
+        private LocalDate date1;
+        @NotNull
+        @Column(name = "time", nullable = false, columnDefinition = "TIME")
+        private LocalTime time;
+
+        public Long getId() {
+                return id;
+        }
+
+        public void setId(Long id) {
+                this.id = id;
+        }
+
+        public Patient getPatient() {
+                return patient;
+        }
+
+        public void setPatient(Patient patient) {
+                this.patient = patient;
+        }
+
+        public Doctor getDoctor() {
+                return doctor;
+        }
+
+        public void setDoctor(Doctor doctor) {
+                this.doctor = doctor;
+        }
+
+        public Examination getExamination() {
+                return examination;
+        }
+
+        public void setExamination(Examination examination) {
+                this.examination = examination;
+        }
+
+        public LocalDate getDate1() {
+                return date1;
+        }
+
+        public void setDate1(LocalDate date1) {
+                this.date1 = date1;
+        }
+
+        public LocalTime getTime() {
+                return time;
+        }
+
+        public void setTime(LocalTime time) {
+                this.time = time;
+        }
+
     }
