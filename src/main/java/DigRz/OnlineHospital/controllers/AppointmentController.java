@@ -8,6 +8,7 @@ import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
 import DigRz.OnlineHospital.repositories.PatientRepository;
 import DigRz.OnlineHospital.repositories.UserRepository;
+import DigRz.OnlineHospital.services.AppointmentService;
 import DigRz.OnlineHospital.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,8 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/appointment")
@@ -36,6 +35,8 @@ public class AppointmentController {
     private PatientRepository patientRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AppointmentService appointmentService;
     @GetMapping("/show")
     private String showPatientAppointments (Model m) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -61,10 +62,6 @@ public class AppointmentController {
     }
     @PostMapping("/submit")
     private String submitAppointment (@Valid Appointment appointment, BindingResult bindingResult, Model m) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.getUserByUsername((auth.getName()));
-        Patient patient = patientRepository.findByUser(user);
-        appointment.setPatient(patient);
         if (bindingResult.hasErrors()) {
             m.addAttribute("doctors", doctorRepository.findAll());
             m.addAttribute("examinationList", Examination.values());
@@ -72,7 +69,8 @@ public class AppointmentController {
             m.addAttribute("hours",utils.generateListOfHours());
             return "/appointment/create";
         }
-        appointmentRepository.save(appointment);
+        //TODO Vikane na metoda za proverka ot servisa
+        appointmentService.saveNewAppointment(appointment);
                     System.out.println("*****"+appointment.getPatient().getFirstName());
         return "redirect:/appointment/show";
     }
