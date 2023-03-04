@@ -17,15 +17,19 @@
 
 
     <form sec:authorize="hasRole('ROLE_PATIENT')">
-    <h2> Patients Menu</h2>
-    <br/>
-    <li>
-        <a href="/doctor/show">Show all doctors</a>
-    </li>
-    <br/>
-    <li>
-        <a href="/appointment/create">Create new appointment</a>
-    </li>
+        <h2> Patients Menu</h2>
+        <br/>
+        <li>
+            <a href="/appointment/show">Show my appointments</a>
+        </li>
+        <br/>
+        <li>
+            <a href="/appointment/create">Create new appointment</a>
+        </li>
+        <br/>
+        <li>
+            <a href="/doctor/show">Show all doctors</a>
+        </li>
     </form>
 
 

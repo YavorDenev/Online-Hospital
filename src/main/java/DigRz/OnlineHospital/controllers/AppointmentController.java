@@ -40,13 +40,9 @@ public class AppointmentController {
 
     @GetMapping("/show")
     private String showPatientAppointments (Model m) {
-
-        //TODO
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername((auth.getName()));
         Patient patient = patientRepository.findByUser(user);
-        //TODO
-
         m.addAttribute("appointmentList", appointmentRepository.findByPatient(patient));
         return "appointment/list";
     }
