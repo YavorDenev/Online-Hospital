@@ -67,9 +67,8 @@ public class AppointmentController {
             m.addAttribute("hours",utils.generateListOfHours());
             return "/appointment/create";
         }
-        //TODO Vikane na metoda za proverka ot servisa
+                        //-----------------------TODO Vikane na metoda za proverka ot servisa
         appointmentService.saveNewAppointment(appointment);
-                    System.out.println("*****"+appointment.getPatient().getFirstName());
         return "redirect:/appointment/show";
     }
 

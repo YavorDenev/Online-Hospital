@@ -19,7 +19,7 @@ public class AppointmentService {
     private UserRepository userRepository;
     @Autowired
     private PatientRepository patientRepository;
-    //TODO Metod za proverka dali chasat e zaet
+                    //-----------------------TODO Metod za proverka dali chasat e zaet
     public void saveNewAppointment(Appointment appointment) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername((auth.getName()));
