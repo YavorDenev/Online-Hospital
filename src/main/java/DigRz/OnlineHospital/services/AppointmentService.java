@@ -55,14 +55,14 @@ public class AppointmentService {
     }
 
 
-//    public static void sortApptsByCriteria(List<Appointment> appointments, String upDown, SortCriteria criterion){
-//        switch (criterion) {
-//            case DATE_TIME -> appointments.sort(Comparator.comparing(Appointment::getDateTimeComparingKey));
-//            case PATIENT_NAMES -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));
-//            case PATIENT_ID -> appointments.sort(Comparator.comparing(Appointment::getPatientID));
-//        }
-//        if (upDown.equalsIgnoreCase("down")) Collections.reverse(appointments);
-//    }
+    public void sortByCriteria(List<Appointment> appointments, int criterion, int upDown){
+        switch (criterion) {
+            case 1 -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));
+            case 2 -> appointments.sort(Comparator.comparing(Appointment::getTimeComparingKey));
+            case 3 -> {}
+        }
+        if (upDown==2) Collections.reverse(appointments);
+    }
 
 
 }
