@@ -23,8 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/appointment")
@@ -41,12 +39,6 @@ public class AppointmentController {
     private UserRepository userRepository;
     @Autowired
     private AppointmentService appointmentService;
-
-    @GetMapping("/show-all")
-    private String showAllAppointments (Model m) {
-        m.addAttribute("appointmentList", appointmentRepository.findAll());
-        return "appointment/list-all";
-    }
 
     @GetMapping("/show")
     private String showPatientAppointments (Model m) {
@@ -111,23 +103,25 @@ public class AppointmentController {
         return "redirect:/appointment/show";
     }
 
+//-----------------------------------------------------------------------------------------
+
+    @GetMapping("/show-all")
+    private String showAllAppointments (Model m) {
+        m.addAttribute("appointmentList", appointmentRepository.findAll());
+        return "appointment/list-all";
+    }
 
     @GetMapping("/doctor_inputs")
     private String searchByDoctor (Model m) {
-    Doctor doctor = new Doctor();
-    m.addAttribute("doctorsList",doctorRepository.findAll());
-    m.addAttribute("doctor", doctor);
+        Doctor doctor = new Doctor();
+        m.addAttribute("doctorsList",doctorRepository.findAll());
+        m.addAttribute("doctor", doctor);
         return "/appointment/doctor_inputs";
     }
 
-
     @PostMapping("/submit_inputs")
     private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
-        Doctor doctor = doctorRepository.findById(doctorId).get();
-        List<Appointment> appointmentList = appointmentRepository.findByDoctorOrderByPatientId(doctor);
-        appointmentService.sortByCriteria(appointmentList, sortCriteria,sortMethod);
-        m.addAttribute("appointmentList", appointmentList);
-
+        m.addAttribute("appointmentList", appointmentService.getSortedAppointments(doctorId, sortCriteria, sortMethod));
         return "/appointment/list-all";
     }
 }

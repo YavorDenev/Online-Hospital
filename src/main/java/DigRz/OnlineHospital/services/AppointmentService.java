@@ -1,9 +1,11 @@
 package DigRz.OnlineHospital.services;
 
 import DigRz.OnlineHospital.entities.Appointment;
+import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.Patient;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
+import DigRz.OnlineHospital.repositories.DoctorRepository;
 import DigRz.OnlineHospital.repositories.PatientRepository;
 import DigRz.OnlineHospital.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class AppointmentService {
     private UserRepository userRepository;
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     public String verifyIfHourIsBusy(Appointment appointment) {
         String date = appointment.getMyDate();
@@ -50,19 +54,20 @@ public class AppointmentService {
     public Patient getCurrentPatient () {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername((auth.getName()));
-        Patient patient = patientRepository.findByUser(user);
-        return patient;
+        return patientRepository.findByUser(user);
     }
 
-
-    public void sortByCriteria(List<Appointment> appointments, int criterion, int upDown){
-        switch (criterion) {
+    public List<Appointment> getSortedAppointments (Long doctorId, int sortCriteria, int sortMethod) {
+        Doctor doctor = doctorRepository.findById(doctorId).get();
+        List<Appointment> appointments = appointmentRepository.findByDoctorOrderByPatientId(doctor);
+        switch (sortCriteria) {
             case 1 -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));
             case 2 -> appointments.sort(Comparator.comparing(Appointment::getTimeComparingKey));
             case 3 -> {}
         }
-        if (upDown==2) Collections.reverse(appointments);
-    }
+        if (sortMethod==2) Collections.reverse(appointments);
 
+        return appointments;
+    }
 
 }
