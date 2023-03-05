@@ -16,4 +16,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findByPatientAndMyDateAndMyTime(Patient patient, String myDate, String myTime);
 
     List<Appointment> findByDoctorOrderByPatientId(Doctor doctor);
+
 }
+
+

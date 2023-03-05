@@ -20,10 +20,17 @@
   <table class="table table-bordered" >
     <thead>
     <tr class="table-light">
-      <th>Id</th>
-      <th>Doctors First Name</th>
-      <th>Doctors Last Name</th>
+      <th>Appointment Id</th>
+
+      <th>Patient Id</th>
+      <th>Patient First Name</th>
+      <th>Patient Last Name</th>
+
+      <th>Doctor Id</th>
+      <th>Doctor First Name</th>
+      <th>Doctor Last Name</th>
       <th>Specialty</th>
+
       <th>Type of examination</th>
       <th>Date</th>
       <th>Time</th>
@@ -34,9 +41,16 @@
     <tbody>
     <tr class="table-active" th:each="xxx : ${appointmentList}">
       <td th:text="${xxx.id}"></td>
+
+      <td th:text="${xxx.patient.id}"></td>
+      <td th:text="${xxx.patient.firstName}"></td>
+      <td th:text="${xxx.patient.lastName}"></td>
+
+      <td th:text="${xxx.doctor.id}"></td>
       <td th:text="${xxx.doctor.firstName}"></td>
       <td th:text="${xxx.doctor.lastName}"></td>
       <td th:text="${xxx.doctor.specialty}"></td>
+
       <td th:text="${xxx.examination}"></td>
       <td th:text="${xxx.myDate}"></td>
       <td th:text="${xxx.myTime}"></td>
