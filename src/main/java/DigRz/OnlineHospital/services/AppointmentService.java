@@ -11,6 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 public class AppointmentService {
     @Autowired
@@ -49,4 +53,16 @@ public class AppointmentService {
         Patient patient = patientRepository.findByUser(user);
         return patient;
     }
+
+
+//    public static void sortApptsByCriteria(List<Appointment> appointments, String upDown, SortCriteria criterion){
+//        switch (criterion) {
+//            case DATE_TIME -> appointments.sort(Comparator.comparing(Appointment::getDateTimeComparingKey));
+//            case PATIENT_NAMES -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));
+//            case PATIENT_ID -> appointments.sort(Comparator.comparing(Appointment::getPatientID));
+//        }
+//        if (upDown.equalsIgnoreCase("down")) Collections.reverse(appointments);
+//    }
+
+
 }

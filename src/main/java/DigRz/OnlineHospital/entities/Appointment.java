@@ -78,4 +78,13 @@ public class Appointment {
         public void setMyTime(String myTime) {
                 this.myTime = myTime;
         }
+
+        public String getPatientNames() {
+                return (this.patient.getLastName() + " " + this.patient.getFirstName()).toLowerCase();
+        }
+
+        public String getTimeComparingKey() {
+                return (this.myDate + " " + this.myTime).toLowerCase();
+        }
+
 }
