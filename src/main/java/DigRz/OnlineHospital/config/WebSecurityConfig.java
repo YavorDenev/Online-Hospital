@@ -41,16 +41,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .mvcMatchers("/login", "/register-first-user", "/register-patient").permitAll()
-                .mvcMatchers("/register-doctor", "/register-admin").hasAnyAuthority("ROLE_ADMIN")
+            .authorizeRequests()
+            .mvcMatchers("/login", "/register-first-user", "/register-patient").permitAll()
+            .mvcMatchers("/").authenticated()
+            .mvcMatchers("/appointment/show", "/appointment/create", "/appointment/edit", "/appointment/delete").hasAnyAuthority("ROLE_PATIENT")
+//TODO              .mvcMatchers().hasAnyAuthority("ROLE_DOCTOR")
+            .mvcMatchers("/register-doctor", "/register-admin").hasAnyAuthority("ROLE_ADMIN")
 
-                .anyRequest().hasAnyAuthority("ROLE_PATIENT", "ROLE_DOCTOR", "ROLE_ADMIN")
+            .anyRequest().hasAnyAuthority( "ROLE_ADMIN")
 
-                .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout().permitAll();
+            .and()
+            .formLogin().loginPage("/login").permitAll()
+            .and()
+            .logout().permitAll();
     }
 
 }
