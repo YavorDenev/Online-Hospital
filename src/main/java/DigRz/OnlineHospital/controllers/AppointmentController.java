@@ -2,6 +2,7 @@ package DigRz.OnlineHospital.controllers;
 
 import DigRz.OnlineHospital.constants.Examination;
 import DigRz.OnlineHospital.entities.Appointment;
+import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.Patient;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/appointment")
@@ -108,4 +111,27 @@ public class AppointmentController {
         return "redirect:/appointment/show";
     }
 
+
+
+
+    @GetMapping("/doctor_inputs")
+    private String searchByDoctor (Model m) {
+    Doctor doctor = new Doctor();
+    m.addAttribute("doctorsList",doctorRepository.findAll());
+    m.addAttribute("doctor", doctor);
+        return "/appointment/doctor_inputs";
+    }
+
+
+    @PostMapping("/submit_inputs")
+    private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
+        Doctor doctor = doctorRepository.findById(doctorId).get();
+
+        List<Appointment> appointmentList = new ArrayList<Appointment>();
+        if (sortCriteria == 3){
+            appointmentList = appointmentRepository.findByDoctorOrderByPatientId(doctor);
+            m.addAttribute("appointmentList", appointmentList);
+        }
+        return "/appointment/list-all";
+    }
 }
