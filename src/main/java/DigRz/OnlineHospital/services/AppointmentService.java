@@ -19,12 +19,34 @@ public class AppointmentService {
     private UserRepository userRepository;
     @Autowired
     private PatientRepository patientRepository;
-                    //-----------------------TODO Metod za proverka dali chasat e zaet
+
+    public String verifyIfHourIsBusy(Appointment appointment) {
+        String date = appointment.getMyDate();
+        String time = appointment.getMyTime();
+        if ( ! (appointmentRepository
+                .findByDoctorAndMyDateAndMyTime(appointment.getDoctor(), date, time)
+                .isEmpty())
+            ) {
+            return "This doctor is busy at this time. Choose another hour!";
+        }
+        if ( ! (appointmentRepository
+                .findByPatientAndMyDateAndMyTime(getCurrentPatient(), date, time)
+                .isEmpty())
+            ) {
+            return "You have another appointment reserved for the same time. Choose another hour!";
+        }
+        return "";
+    }
+
     public void saveNewAppointment(Appointment appointment) {
+        appointment.setPatient(getCurrentPatient());
+        appointmentRepository.save(appointment);
+    }
+
+    public Patient getCurrentPatient () {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername((auth.getName()));
         Patient patient = patientRepository.findByUser(user);
-        appointment.setPatient(patient);
-        appointmentRepository.save(appointment);
+        return patient;
     }
 }

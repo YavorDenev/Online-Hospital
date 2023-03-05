@@ -45,12 +45,12 @@
 
                     <td>
                         <form th:action="@{/appointment/edit/{appointmentId}(appointmentId=${xxx.id})}"method="get">
-                            <input class="btn btn-success" type="submit" value="Update">
+                            <input class="btn btn-success" type="submit" value="Change date, time">
                         </form>
                     </td>
                     <td>
                         <form th:action="@{/appointment/delete/{appointmentId}(appointmentId=${xxx.id})}" method="post">
-                            <input class="btn btn-danger" type="submit" value="Delete">
+                            <input class="btn btn-danger" type="submit" value="Refuse this appointment">
                         </form>
                     </td>
 

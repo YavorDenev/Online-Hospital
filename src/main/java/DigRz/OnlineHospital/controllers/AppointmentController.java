@@ -2,6 +2,7 @@ package DigRz.OnlineHospital.controllers;
 
 import DigRz.OnlineHospital.constants.Examination;
 import DigRz.OnlineHospital.entities.Appointment;
+import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.Patient;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
@@ -55,22 +56,22 @@ public class AppointmentController {
         m.addAttribute("examinationList", Examination.values());
         m.addAttribute("days",utils.generateListOfDays());
         m.addAttribute("hours",utils.generateListOfHours());
-
         return "/appointment/create";
     }
     @PostMapping("/submit")
     private String submitAppointment (@Valid Appointment appointment, BindingResult bindingResult, Model m) {
-        if (bindingResult.hasErrors()) {
-            m.addAttribute("doctors", doctorRepository.findAll());
-            m.addAttribute("examinationList", Examination.values());
-            m.addAttribute("days",utils.generateListOfDays());
-            m.addAttribute("hours",utils.generateListOfHours());
-            return "/appointment/create";
-        }
-                        //-----------------------TODO Vikane na metoda za proverka ot servisa
+        m.addAttribute("doctors", doctorRepository.findAll());
+        m.addAttribute("examinationList", Examination.values());
+        m.addAttribute("days",utils.generateListOfDays());
+        m.addAttribute("hours",utils.generateListOfHours());
+        if (bindingResult.hasErrors()) return "/appointment/create";
+
+        String message = appointmentService.verifyIfHourIsBusy(appointment);
+        m.addAttribute("successMessage", message);
+        if ( !(message.equals("")) ) return "/appointment/create";
+
         appointmentService.saveNewAppointment(appointment);
         return "redirect:/appointment/show";
     }
-
 
 }
