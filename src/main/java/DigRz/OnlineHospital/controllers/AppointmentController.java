@@ -39,6 +39,12 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
+    @GetMapping("/show-all")
+    private String showAllAppointments (Model m) {
+        m.addAttribute("appointmentList", appointmentRepository.findAll());
+        return "appointment/list-all";
+    }
+
     @GetMapping("/show")
     private String showPatientAppointments (Model m) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
