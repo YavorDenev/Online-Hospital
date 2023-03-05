@@ -128,6 +128,8 @@ public class AppointmentController {
         Doctor doctor = doctorRepository.findById(doctorId).get();
 
         List<Appointment> appointmentList = new ArrayList<Appointment>();
+        appointmentList = appointmentRepository.findByDoctorOrderByPatientId(doctor);
+
         if (sortCriteria == 3){
             appointmentList = appointmentRepository.findByDoctorOrderByPatientId(doctor);
             m.addAttribute("appointmentList", appointmentList);
