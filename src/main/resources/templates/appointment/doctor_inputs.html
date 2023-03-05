@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-
     <title>Appointments by doctor</title>
 </head>
 <body>
-<h1>Select doctor, sort criteria and sort direction for appointment</h1>
+<h2>Select doctor, sort criteria and sort direction for appointment</h2>
+
 <form action="#" th:action="@{/appointment/submit_inputs}" method="post" >
 
-    <p>Doctor:
+        <br/>
+        <label for="doctorId">Doctor:</label>
         <select name="doctorId" id="doctorId">
             <option th:each="d : ${doctorsList}"
                     th:value="${d.id}"
                     th:text="${d.firstName} + ' ' + ${d.lastName}">
             </option>
         </select>
-    </p>
 
+    <br/>
+    <br/>
+    <br/>
     <label for="sortCriteria">Sort by:</label>
-
     <select name="sortCriteria" id="sortCriteria">
         <option value=1>Name of patient</option>
         <option value=2>Time</option>
         <option value=3>Patient ID</option>
-
     </select>
 
     <select name="sortMethod" id="sortMethod">
@@ -31,9 +32,9 @@
         <option value=2>Descending</option>
     </select>
 
-    <p><input type="submit" value="Submit"></p>
     <br/>
-    <span th:utext="${successMessage}" style="color:red"></span>
+    <br/>
+    <p><input type="submit" value="Submit"></p>
 
 </form>
 </body>
