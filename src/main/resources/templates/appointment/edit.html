@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit my appointment</title>
+</head>
+    <body>
+        <h1>Edit my appointment  date, time</h1>
+
+        <form action="#" th:action="@{/appointment/edit}" method="post" th:object="${appointment}">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{doctor}">
+            <input type="hidden" th:field="*{examination}">
+
+            <p>Day:
+                <select th:field="*{myDate}">
+                    <option th:each="a : ${days}"
+                            th:value="${a}"
+                            th:text="${a}">
+                    </option>
+
+                </select>
+            </p>
+            <p>Hour:
+                <select th:field="*{myTime}">
+                    <option th:each="h : ${hours}"
+                            th:value="${h}"
+                            th:text="${h}">
+                    </option>
+                </select>
+            </p>
+
+            <p><input type="submit" name="update" value="Update date, time"></p>
+
+            <br/>
+            <span th:utext="${successMessage}" style="color:red"></span>
+
+        </form>
+
+    </body>
+</html>
+
+

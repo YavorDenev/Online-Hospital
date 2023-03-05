@@ -7,7 +7,7 @@
 <body>
 <h1>Create New Appointment</h1>
 
-<form action="#" th:action="@{/appointment/submit}" method="post" th:object="${appointment}">
+<form action="#" th:action="@{/appointment/create}" method="post" th:object="${appointment}">
 
   <p>Doctor:
     <select th:field="*{doctor}">

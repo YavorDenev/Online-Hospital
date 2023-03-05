@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -57,7 +58,7 @@ public class AppointmentController {
         m.addAttribute("hours",utils.generateListOfHours());
         return "/appointment/create";
     }
-    @PostMapping("/submit")
+    @PostMapping("/create")
     private String submitAppointment (@Valid Appointment appointment, BindingResult bindingResult, Model m) {
         m.addAttribute("doctors", doctorRepository.findAll());
         m.addAttribute("examinationList", Examination.values());
@@ -73,6 +74,32 @@ public class AppointmentController {
         return "redirect:/appointment/show";
     }
 
+    @GetMapping("/edit/{id}")
+    private String editAppointmentDateTime (@PathVariable(name = "id") Long id, Model m) {
+        m.addAttribute("appointment", appointmentRepository.findById(id));
+        m.addAttribute("days",utils.generateListOfDays());
+        m.addAttribute("hours",utils.generateListOfHours());
+        return "/appointment/edit";
+    }
 
+    @PostMapping("/edit")
+    private String updateAppointmentDateTime( @Valid Appointment appointment, BindingResult bindingResult, Model m){
+        m.addAttribute("days",utils.generateListOfDays());
+        m.addAttribute("hours",utils.generateListOfHours());
+        if (bindingResult.hasErrors()) return "/appointment/edit";
+
+        String message = appointmentService.verifyIfHourIsBusy(appointment);
+        m.addAttribute("successMessage", message);
+        if ( !(message.equals("")) ) return "/appointment/edit";
+
+        appointmentService.saveNewAppointment(appointment);
+        return "redirect:/appointment/show";
+    }
+
+    @PostMapping("/delete/{id}")
+    private String deleteAppointment (@PathVariable(name = "id") Long id) {
+        appointmentRepository.deleteById(id);
+        return "redirect:/appointment/show";
+    }
 
 }

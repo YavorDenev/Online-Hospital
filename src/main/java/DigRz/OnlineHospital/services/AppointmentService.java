@@ -24,16 +24,16 @@ public class AppointmentService {
         String date = appointment.getMyDate();
         String time = appointment.getMyTime();
         if ( ! (appointmentRepository
+                .findByPatientAndMyDateAndMyTime(getCurrentPatient(), date, time)
+                .isEmpty())
+        ) {
+            return "You have an appointment reserved for the same time. Choose another hour!";
+        }
+        if ( ! (appointmentRepository
                 .findByDoctorAndMyDateAndMyTime(appointment.getDoctor(), date, time)
                 .isEmpty())
             ) {
             return "This doctor is busy at this time. Choose another hour!";
-        }
-        if ( ! (appointmentRepository
-                .findByPatientAndMyDateAndMyTime(getCurrentPatient(), date, time)
-                .isEmpty())
-            ) {
-            return "You have another appointment reserved for the same time. Choose another hour!";
         }
         return "";
     }
