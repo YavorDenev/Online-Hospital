@@ -102,7 +102,7 @@ public class AppointmentController {
         return "redirect:/appointment/show";
     }
 
-//-----------------------------------------------------------------------------------------
+//----------------------------------------------------------------
 
     @GetMapping("/show-all")
     private String showAllAppointments (Model m) {
