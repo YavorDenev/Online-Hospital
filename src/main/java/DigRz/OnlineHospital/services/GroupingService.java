@@ -1,5 +1,6 @@
 package DigRz.OnlineHospital.services;
 
+import DigRz.OnlineHospital.constants.Specialty;
 import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.Patient;
@@ -10,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -56,6 +54,35 @@ public class GroupingService {
 
         for (LocalDate day:utils.generateListOfDays()) {
             patientsCount.put(day.toString(),findPatientsByDate(day.toString()).stream().count());
+        }
+        return patientsCount;
+    }
+
+    public EnumMap<Specialty,HashSet<Patient>> findPatientsByDepartment() {
+        EnumMap<Specialty,HashSet<Patient>> patientsEnumMap = new EnumMap<Specialty,HashSet<Patient>>(Specialty.class);
+        for (Appointment app:appointmentRepository.findAll()) {
+            //System.out.println(app.getDoctor().getSpecialty());
+            Specialty specialty = Specialty.valueOf(app.getDoctor().getSpecialty().toUpperCase());
+            //System.out.println(specialty);
+            HashSet<Patient> patients = patientsEnumMap.get(specialty);
+            System.out.println(specialty.toString());
+            System.out.println(specialty.name());
+            System.out.println(specialty.getValue());
+
+            if (patients == null) {
+                patients = new HashSet<>();
+            }
+            patients.add(app.getPatient());
+            patientsEnumMap.put(specialty, patients);
+        }
+        return patientsEnumMap;
+    }
+    public LinkedHashMap<String,Integer> findPatientsCountByDepartment(){
+        LinkedHashMap<String,Integer> patientsCount = new LinkedHashMap<String,Integer>();
+
+        for (Specialty spec :findPatientsByDepartment().keySet()) {
+            patientsCount.put(spec.getValue(),findPatientsByDepartment().get(spec).size());
+            System.out.println(spec +" " + findPatientsByDepartment().get(spec).size());
         }
         return patientsCount;
     }

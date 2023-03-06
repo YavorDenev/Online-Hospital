@@ -36,4 +36,11 @@ public class GroupingController {
         m.addAttribute("dateList", groupingService.findPatientsCountByDate());
         return "grouping/by_date";
     }
+
+    @GetMapping("/by_department")
+    private String groupByDepartment (Model m) {
+
+        m.addAttribute("departmentList", groupingService.findPatientsCountByDepartment());
+        return "grouping/by_department";
+    }
 }

@@ -10,7 +10,7 @@ public enum Specialty {
     GYNECOLOGY("Gynecology"),
     INTERNAL_DISEASES("Internal_diseases"),
     NEPHROLOGY("Nephrology"),
-    NEUROLOGY("Neurology"),
+   NEUROLOGY("Neurology"),
     OPHTHALMOLOGY("Ophthalmology"),
     ORTHOPEDICS("Orthopedics"),
     PSYCHIATRY("Psychiatry"),
