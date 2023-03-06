@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
   <meta charset="UTF-8">
-  <title>Appointments list</title>
+  <title>Full appointments list</title>
   <script src=https://code.jquery.com/jquery-3.6.0.js></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="col-md-10" align="center">
-  <h1>Appointments list</h1>
+  <h1>Full appointments list</h1>
   <br/>
   <a th:href="@{/}">Back to main menu</a>
   <br/>
@@ -20,17 +20,16 @@
   <table class="table table-bordered" >
     <thead>
     <tr class="table-light">
-<!--      <th>Appointment Id</th>-->
+      <th>Appointment Id</th>
 
       <th>Patient Id</th>
-      <th>Patient Last Name</th>
       <th>Patient First Name</th>
+      <th>Patient Last Name</th>
       <th>Patient Age</th>
 
       <th>Doctor Id</th>
-      <th>Doctor Names</th>
-<!--      <th>Doctor First Name</th>-->
-<!--      <th>Doctor Last Name</th>-->
+      <th>Doctor First Name</th>
+      <th>Doctor Last Name</th>
       <th>Specialty</th>
 
       <th>Type of examination</th>
@@ -42,17 +41,16 @@
 
     <tbody>
     <tr class="table-active" th:each="xxx : ${appointmentList}">
-<!--      <td th:text="${xxx.id}"></td>-->
+      <td th:text="${xxx.id}"></td>
 
       <td th:text="${xxx.patient.id}"></td>
-      <td th:text="${xxx.patient.lastName}"></td>
       <td th:text="${xxx.patient.firstName}"></td>
+      <td th:text="${xxx.patient.lastName}"></td>
       <td th:text="${xxx.patient.age}"></td>
 
       <td th:text="${xxx.doctor.id}"></td>
-      <td th:text="${xxx.doctor.firstName} + ' ' + ${xxx.doctor.lastName}"></td>
-<!--      <td th:text="${xxx.doctor.firstName}"></td>-->
-<!--      <td th:text="${xxx.doctor.lastName}"></td>-->
+      <td th:text="${xxx.doctor.firstName}"></td>
+      <td th:text="${xxx.doctor.lastName}"></td>
       <td th:text="${xxx.doctor.specialty}"></td>
 
       <td th:text="${xxx.examination}"></td>

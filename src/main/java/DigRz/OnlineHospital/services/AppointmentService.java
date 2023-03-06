@@ -1,7 +1,7 @@
 package DigRz.OnlineHospital.services;
 
 import DigRz.OnlineHospital.entities.Appointment;
-import DigRz.OnlineHospital.entities.Doctor;
+
 import DigRz.OnlineHospital.entities.Patient;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
@@ -12,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 @Service
 public class AppointmentService {

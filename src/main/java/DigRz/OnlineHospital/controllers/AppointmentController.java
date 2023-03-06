@@ -2,7 +2,6 @@ package DigRz.OnlineHospital.controllers;
 
 import DigRz.OnlineHospital.constants.Examination;
 import DigRz.OnlineHospital.entities.Appointment;
-import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.Patient;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;

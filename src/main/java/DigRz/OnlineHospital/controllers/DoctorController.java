@@ -3,7 +3,6 @@ package DigRz.OnlineHospital.controllers;
 import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
-import DigRz.OnlineHospital.services.AppointmentService;
 import DigRz.OnlineHospital.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

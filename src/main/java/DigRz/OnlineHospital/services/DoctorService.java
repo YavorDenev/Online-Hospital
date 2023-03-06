@@ -8,6 +8,8 @@ import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
 import DigRz.OnlineHospital.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -49,6 +51,10 @@ public class DoctorService {
         return appointments;
     }
 
-
+    public Doctor getCurrentDoctor () {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.getUserByUsername((auth.getName()));
+        return doctorRepository.findByUser(user);
+    }
 
 }
