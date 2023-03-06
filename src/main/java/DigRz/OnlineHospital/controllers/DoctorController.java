@@ -30,7 +30,7 @@ public class DoctorController {
     @GetMapping("/show-apps")
     private String showAllAppointments (Model m) {
         m.addAttribute("appointmentList", appointmentRepository.findAll());
-        return "doctor/list-all";
+        return "doctor/list-apps";
     }
 
     @GetMapping("/search_choice")
@@ -44,7 +44,7 @@ public class DoctorController {
     @PostMapping("/submit_choice")
     private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
         m.addAttribute("appointmentList", doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod));
-        return "/doctor/list-all";
+        return "/doctor/list-apps";
     }
 
 }
