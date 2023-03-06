@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +28,15 @@ public class DoctorController {
         m.addAttribute("doctorList", doctorRepository.findAll());
         return "doctor/list";
     }
+
+    @PostMapping("/delete/{id}")
+    private String deleteDoctor (@PathVariable(name = "id") Long id) {
+        doctorRepository.deleteById(id);
+        return "redirect:/doctor/show";
+    }
+
+    //----------------------------------------------------
+
     @GetMapping("/show-apps")
     private String showAllAppointments (Model m) {
         m.addAttribute("appointmentList", appointmentRepository.findAll());
