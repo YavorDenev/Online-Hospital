@@ -12,6 +12,7 @@
     <p>
         <label for="doctorId">Doctor:</label>
         <select name="doctorId" id="doctorId">
+            <option value=0>You</option>
             <option th:each="d : ${doctorsList}"
                     th:value="${d.id}"
                     th:text="${d.firstName} + ' ' + ${d.lastName}">
