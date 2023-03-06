@@ -5,9 +5,12 @@
     <title>Doctors list</title>
 </head>
 <body>
-    <h1>Doctors list</h1>
+    <h2>Doctors list</h2>
 
-    <p></p>
+    <a th:href="@{/}">Back to main menu</a>
+    <br/>
+    <br/>
+
     <table>
         <thead>
         <tr>
@@ -25,12 +28,8 @@
             <td th:text="${xxx.firstName}"></td>
             <td th:text="${xxx.lastName}"></td>
             <td th:text="${xxx.specialty}"></td>
-
         </tr>
         </tbody>
     </table>
-    </p>
-    <a th:href="@{/}">Back to main menu</a>
-
 </body>
 </html>
