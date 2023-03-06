@@ -34,21 +34,20 @@
             <td th:text="${xxx.firstName}"></td>
             <td th:text="${xxx.lastName}"></td>
             <td th:text="${xxx.specialty}"></td>
+
+            <td sec:authorize="hasRole('ROLE_ADMIN')">
+                <form th:action="@{/doctor/edit/{doctorId}(doctorId=${xxx.id})}"method="get">
+                   <input class="btn btn-success" type="submit" value="Edit doctor">
+                </form>
+            </td>
+
+            <td sec:authorize="hasRole('ROLE_ADMIN')" >
+                <form th:action="@{/doctor/delete/{doctorId}(doctorId=${xxx.id})}" method="post">
+                    <input class="btn btn-danger" type="submit" value="Delete doctor">
+                </form>
+            </td>
+
         </tr>
-
-<!--        <form sec:authorize="hasRole('ROLE_ADMIN')">-->
-<!--            <td>-->
-<!--                <form th:action="@{/doctor/edit/{doctorId}(doctorId=${xxx.id})}"method="get">-->
-<!--                    <input class="btn btn-success" type="submit" value="Edit doctor">-->
-<!--                </form>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--                <form th:action="@{/doctor/delete/{doctorId}(doctorId=${xxx.id})}" method="post">-->
-<!--                    <input class="btn btn-danger" type="submit" value="Delete doctor">-->
-<!--                </form>-->
-<!--            </td>-->
-<!--        </form>-->
-
         </tbody>
     </table>
 
