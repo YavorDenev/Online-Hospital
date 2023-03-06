@@ -21,7 +21,6 @@ public class DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -38,8 +37,10 @@ public class DoctorService {
 
         doctorRepository.save(doctor);
     }
+
     public List<Appointment> getSortedAppointments (Long doctorId, int sortCriteria, int sortMethod) {
-        Doctor doctor = doctorRepository.findById(doctorId).get();
+        Doctor doctor = getCurrentDoctor();
+        if (doctorId != 0) doctor = doctorRepository.findById(doctorId).get();
         List<Appointment> appointments = appointmentRepository.findByDoctorOrderByPatientId(doctor);
         switch (sortCriteria) {
             case 1 -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));

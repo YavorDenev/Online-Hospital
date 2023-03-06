@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Full appointments list</title>
@@ -10,9 +10,9 @@
         crossorigin="anonymous">
 </head>
 <body>
-<div class="col-md-10" align="center">
-  <h1>Full appointments list</h1>
-  <br/>
+<div class="col-md-12" align="center">
+  <h2>Full appointments list</h2>
+
   <a th:href="@{/}">Back to main menu</a>
   <br/>
 
@@ -20,7 +20,7 @@
   <table class="table table-bordered" >
     <thead>
     <tr class="table-light">
-      <th>Appointment Id</th>
+      <th>App. Id</th>
 
       <th>Patient Id</th>
       <th>Patient First Name</th>
@@ -32,7 +32,7 @@
       <th>Doctor Last Name</th>
       <th>Specialty</th>
 
-      <th>Type of examination</th>
+      <th>Type examination</th>
       <th>Date</th>
       <th>Time</th>
 
