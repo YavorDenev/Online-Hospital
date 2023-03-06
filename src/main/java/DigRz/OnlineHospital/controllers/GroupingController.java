@@ -30,23 +30,10 @@ public class GroupingController {
         m.addAttribute("doctorList", groupingService.findPatientsCountByDoctor());
         return "grouping/by_doctor";
     }
-//    @GetMapping("/show-apps")
-//    private String showAllAppointments (Model m) {
-//        m.addAttribute("appointmentList", appointmentRepository.findAll());
-//        return "doctor/list-apps";
-//    }
-//
-//    @GetMapping("/search_choice")
-//    private String searchByDoctor (Model m) {
-//        Doctor doctor = new Doctor();
-//        m.addAttribute("doctorsList",doctorRepository.findAll());
-//        m.addAttribute("doctor", doctor);
-//        return "/doctor/search_choice";
-//    }
-//
-//    @PostMapping("/submit_choice")
-//    private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
-//        m.addAttribute("appointmentList", doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod));
-//        return "/doctor/list-apps";
-//    }
+    @GetMapping("/by_date")
+    private String groupByDate (Model m) {
+
+        m.addAttribute("dateList", groupingService.findPatientsCountByDate());
+        return "grouping/by_date";
+    }
 }

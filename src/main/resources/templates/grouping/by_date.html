@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Grouping patient appointments by doctor</title>
+    <title>Grouping patient appointments by date</title>
     <script src=https://code.jquery.com/jquery-3.6.0.js></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -11,24 +11,20 @@
 </head>
 <body>
 <div class="col-md-6" align="center">
-<h2>Grouping patient appointments by doctor</h2>
+<h2>Grouping patient appointments by date</h2>
     <a th:href="@{/}">Back to main menu</a>
     <br/>
     <br/>
     <table class="table table-bordered">
     <thead>
     <tr class="table-light">
-        <th>Doctor Id</th>
-        <th>First name</th>
-        <th>Last name</th>
+        <th>Date</th>
         <th>Patients count</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="table-active" th:each="d : ${doctorList}">
-        <td th:text="${d.key.id}" />
-        <td th:text="${d.key.firstName}" />
-        <td th:text="${d.key.lastName}" />
+    <tr class="table-active" th:each="d : ${dateList}">
+        <td th:text="${d.key}" />
         <td th:text="${d.value}" />
     </tr>
     </tbody>
