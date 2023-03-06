@@ -34,6 +34,7 @@ public class GroupingService {
     }
     public Map<Doctor,Long> findPatientsCountByDoctor(){
         Map<Doctor,Long> patientsCount = new LinkedHashMap<>();
+
         for (Doctor dr:doctorRepository.findAll()) {
             patientsCount.put(dr,findPatientsByDoctor(dr.getId()).stream().count());
         }
@@ -60,15 +61,10 @@ public class GroupingService {
 
     public EnumMap<Specialty,HashSet<Patient>> findPatientsByDepartment() {
         EnumMap<Specialty,HashSet<Patient>> patientsEnumMap = new EnumMap<Specialty,HashSet<Patient>>(Specialty.class);
-        for (Appointment app:appointmentRepository.findAll()) {
-            //System.out.println(app.getDoctor().getSpecialty());
-            Specialty specialty = Specialty.valueOf(app.getDoctor().getSpecialty().toUpperCase());
-            //System.out.println(specialty);
-            HashSet<Patient> patients = patientsEnumMap.get(specialty);
-            System.out.println(specialty.toString());
-            System.out.println(specialty.name());
-            System.out.println(specialty.getValue());
 
+        for (Appointment app:appointmentRepository.findAll()) {
+            Specialty specialty = Specialty.valueOf(app.getDoctor().getSpecialty().toUpperCase());
+            HashSet<Patient> patients = patientsEnumMap.get(specialty);
             if (patients == null) {
                 patients = new HashSet<>();
             }
