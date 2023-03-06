@@ -57,17 +57,5 @@ public class AppointmentService {
         return patientRepository.findByUser(user);
     }
 
-    public List<Appointment> getSortedAppointments (Long doctorId, int sortCriteria, int sortMethod) {
-        Doctor doctor = doctorRepository.findById(doctorId).get();
-        List<Appointment> appointments = appointmentRepository.findByDoctorOrderByPatientId(doctor);
-        switch (sortCriteria) {
-            case 1 -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));
-            case 2 -> appointments.sort(Comparator.comparing(Appointment::getTimeComparingKey));
-            case 3 -> {}
-        }
-        if (sortMethod==2) Collections.reverse(appointments);
-
-        return appointments;
-    }
 
 }

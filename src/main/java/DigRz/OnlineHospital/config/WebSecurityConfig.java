@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .mvcMatchers( "/doctor/show", "/").authenticated()
             .mvcMatchers("/appointment/show", "/appointment/create", "/appointment/edit", "/appointment/edit/*", "/appointment/delete/*").hasAnyAuthority("ROLE_PATIENT")
 
-            .mvcMatchers("/patient/show", "/appointment/show-all","/appointment/doctor_inputs","/appointment/submit_inputs").hasAnyAuthority("ROLE_DOCTOR", "ROLE_ADMIN")
+            .mvcMatchers("/patient/show", "/doctor/*").hasAnyAuthority("ROLE_DOCTOR", "ROLE_ADMIN")
 
             .anyRequest().hasAnyAuthority( "ROLE_ADMIN")
 

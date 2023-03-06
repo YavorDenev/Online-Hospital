@@ -111,17 +111,4 @@ public class AppointmentController {
         return "appointment/list-all";
     }
 
-    @GetMapping("/doctor_inputs")
-    private String searchByDoctor (Model m) {
-        Doctor doctor = new Doctor();
-        m.addAttribute("doctorsList",doctorRepository.findAll());
-        m.addAttribute("doctor", doctor);
-        return "/appointment/doctor_inputs";
-    }
-
-    @PostMapping("/submit_inputs")
-    private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
-        m.addAttribute("appointmentList", appointmentService.getSortedAppointments(doctorId, sortCriteria, sortMethod));
-        return "/appointment/list-all";
-    }
 }

@@ -6,9 +6,10 @@
 <body>
 <h2>Select doctor, sort criteria and sort direction for appointment</h2>
 
-<form action="#" th:action="@{/appointment/submit_inputs}" method="post" >
+<form action="#" th:action="@{/doctor/submit_choice}" method="post" >
 
         <br/>
+    <p>
         <label for="doctorId">Doctor:</label>
         <select name="doctorId" id="doctorId">
             <option th:each="d : ${doctorsList}"
@@ -16,24 +17,22 @@
                     th:text="${d.firstName} + ' ' + ${d.lastName}">
             </option>
         </select>
-
-    <br/>
-    <br/>
-    <br/>
+    </p>
+    <p>
     <label for="sortCriteria">Sort by:</label>
     <select name="sortCriteria" id="sortCriteria">
         <option value=1>Name of patient</option>
         <option value=2>Time</option>
         <option value=3>Patient ID</option>
     </select>
-
+    </p>
+    <p>
+    <label for="sortMethod">Sort method:</label>
     <select name="sortMethod" id="sortMethod">
         <option value=1>Ascending</option>
         <option value=2>Descending</option>
     </select>
-
-    <br/>
-    <br/>
+    </p>
     <p><input type="submit" value="Submit"></p>
 
 </form>
