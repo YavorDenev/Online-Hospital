@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
-
 @Service
 public class GroupingService {
     @Autowired
@@ -22,6 +21,7 @@ public class GroupingService {
     DoctorRepository doctorRepository;
     @Autowired
     Utils utils;
+
     public Set<Patient> findPatientsByDoctor(Long doctorId) {
         Set<Patient> patientsSet = new HashSet<>();
 
@@ -32,6 +32,7 @@ public class GroupingService {
         }
         return patientsSet;
     }
+
     public Map<Doctor,Long> findPatientsCountByDoctor(){
         Map<Doctor,Long> patientsCount = new LinkedHashMap<>();
 
@@ -40,6 +41,7 @@ public class GroupingService {
         }
         return patientsCount;
     }
+
     public Set<Patient> findPatientsByDate(String date) {
         Set<Patient> patientsSet = new HashSet<>();
 
@@ -50,6 +52,7 @@ public class GroupingService {
         }
         return patientsSet;
     }
+
     public Map<String,Long> findPatientsCountByDate(){
         Map<String,Long> patientsCount = new LinkedHashMap<>();
 
@@ -72,9 +75,9 @@ public class GroupingService {
             patients.add(app.getPatient());
             patientsEnumMap.put(specialty, patients);
         }
-
         return patientsEnumMap;
     }
+
     public Map<String,Integer> findPatientsCountByDepartment(){
         Map<String,Integer> patientsCount = new LinkedHashMap<String,Integer>();
 
