@@ -1,8 +1,6 @@
 package DigRz.OnlineHospital.controllers;
 
-import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Doctor;
-import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
 import DigRz.OnlineHospital.repositories.UserRepository;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/doctor")
@@ -38,26 +34,17 @@ public class DoctorController {
 
 
 //    @GetMapping("/edit/{id}")
-//    private String editAppointmentDateTime (@PathVariable(name = "id") Long id, Model m) {
-//        m.addAttribute("appointment", appointmentRepository.findById(id));
-//        m.addAttribute("days",utils.generateListOfDays());
-//        m.addAttribute("hours",utils.generateListOfHours());
-//        return "/appointment/edit";
+//    private String editDoctor (@PathVariable(name = "id") Long id, Model m) {
+//        m.addAttribute("specialtyList", Specialty.values());
+//        return "/doctor/edit";
 //    }
-//
 //    @PostMapping("/edit")
-//    private String updateAppointmentDateTime(@Valid Appointment appointment, BindingResult bindingResult, Model m){
-//        m.addAttribute("days",utils.generateListOfDays());
-//        m.addAttribute("hours",utils.generateListOfHours());
-//        if (bindingResult.hasErrors()) return "/appointment/edit";
-//
-//        String message = appointmentService.verifyIfHourIsBusy(appointment);
-//        m.addAttribute("successMessage", message);
-//        if ( !(message.equals("")) ) return "/appointment/edit";
-//
-//        appointmentService.saveNewAppointment(appointment);
+//    private String updateDoctor(@Valid Doctor doctor, BindingResult bindingResult){
+//        if (bindingResult.hasErrors()) return "/doctor/edit";
+//        doctorRepository.save(doctor);
 //        return "redirect:/appointment/show";
 //    }
+
 
     @PostMapping("/delete/{id}")
     private String deleteDoctor (@PathVariable(name = "id") Long id) {
