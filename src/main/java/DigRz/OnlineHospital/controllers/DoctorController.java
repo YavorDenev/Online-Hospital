@@ -61,11 +61,7 @@ public class DoctorController {
 
     @PostMapping("/delete/{id}")
     private String deleteDoctor (@PathVariable(name = "id") Long id) {
-        List<Appointment> appointmentList = appointmentRepository.findByDoctorId(id);
-        appointmentRepository.deleteAll(appointmentList);
-        User user = doctorService.getDoctorById(id).getUser();
-        doctorRepository.deleteById(id);
-        userRepository.delete(user);
+        doctorService.deleteDoctorAndHisAppointments(id);
         return "redirect:/doctor/show";
     }
 

@@ -67,4 +67,13 @@ public class DoctorService {
         Doctor doctor = getDoctorById(doctorId);
         return " " + doctor.getFirstName() + " " + doctor.getLastName() + " with specialty " + doctor.getSpecialty() + " and ID " + doctor.getId();
     }
+
+    public void deleteDoctorAndHisAppointments(Long id) {
+        List<Appointment> appointmentList = appointmentRepository.findByDoctorId(id);
+        appointmentRepository.deleteAll(appointmentList);
+        User user = getDoctorById(id).getUser();
+        doctorRepository.deleteById(id);
+        userRepository.delete(user);
+    }
+
 }
