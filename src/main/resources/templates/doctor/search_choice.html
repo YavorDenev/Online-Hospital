@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Appointments by doctor</title>
 </head>
@@ -12,7 +12,9 @@
     <p>
         <label for="doctorId">Doctor:</label>
         <select name="doctorId" id="doctorId">
-            <option value=0>You</option>
+                <a sec:authorize="hasRole('ROLE_DOCTOR')">
+                <option value=0 >You</option>
+                </a>
             <option th:each="d : ${doctorsList}"
                     th:value="${d.id}"
                     th:text="${d.firstName} + ' ' + ${d.lastName}">
