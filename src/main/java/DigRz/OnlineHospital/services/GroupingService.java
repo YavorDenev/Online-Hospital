@@ -22,8 +22,8 @@ public class GroupingService {
     DoctorRepository doctorRepository;
     @Autowired
     Utils utils;
-    public HashSet<Patient> findPatientsByDoctor(Long doctorId) {
-        HashSet<Patient> patientsSet = new HashSet<>();
+    public Set<Patient> findPatientsByDoctor(Long doctorId) {
+        Set<Patient> patientsSet = new HashSet<>();
 
         for (Appointment app:appointmentRepository.findAll()) {
             if (app.getDoctor().getId() == doctorId){
@@ -40,8 +40,8 @@ public class GroupingService {
         }
         return patientsCount;
     }
-    public HashSet<Patient> findPatientsByDate(String date) {
-        HashSet<Patient> patientsSet = new HashSet<>();
+    public Set<Patient> findPatientsByDate(String date) {
+        Set<Patient> patientsSet = new HashSet<>();
 
         for (Appointment app:appointmentRepository.findAll()) {
             if (app.getMyDate().equals(date)){
@@ -62,23 +62,24 @@ public class GroupingService {
     public EnumMap<Specialty,HashSet<Patient>> findPatientsByDepartment() {
         EnumMap<Specialty,HashSet<Patient>> patientsEnumMap = new EnumMap<Specialty,HashSet<Patient>>(Specialty.class);
 
+        for (Specialty sp: Specialty.values()){
+            HashSet<Patient> patients = new HashSet<>();
+            patientsEnumMap.put(sp, patients);
+        }
         for (Appointment app:appointmentRepository.findAll()) {
             Specialty specialty = Specialty.valueOf(app.getDoctor().getSpecialty().toUpperCase());
             HashSet<Patient> patients = patientsEnumMap.get(specialty);
-            if (patients == null) {
-                patients = new HashSet<>();
-            }
             patients.add(app.getPatient());
             patientsEnumMap.put(specialty, patients);
         }
+
         return patientsEnumMap;
     }
-    public LinkedHashMap<String,Integer> findPatientsCountByDepartment(){
-        LinkedHashMap<String,Integer> patientsCount = new LinkedHashMap<String,Integer>();
+    public Map<String,Integer> findPatientsCountByDepartment(){
+        Map<String,Integer> patientsCount = new LinkedHashMap<String,Integer>();
 
         for (Specialty spec :findPatientsByDepartment().keySet()) {
             patientsCount.put(spec.getValue(),findPatientsByDepartment().get(spec).size());
-            System.out.println(spec +" " + findPatientsByDepartment().get(spec).size());
         }
         return patientsCount;
     }
