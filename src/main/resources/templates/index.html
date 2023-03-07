@@ -15,78 +15,46 @@
     <br/>
     <br/>
 
-
     <form sec:authorize="hasRole('ROLE_PATIENT')">
         <h2> Patients Menu</h2>
         <br/>
-        <li>
-            <a href="/appointment/show">Show my appointments</a>
-        </li>
+        <li> <a href="/appointment/show">Show my appointments</a></li>
         <br/>
-        <li>
-            <a href="/appointment/create">Create new appointment</a>
-        </li>
+        <li> <a href="/appointment/create">Create new appointment</a></li>
         <br/>
-        <li>
-            <a href="/doctor/show">Show all doctors</a>
-        </li>
+        <li> <a href="/doctor/show">Show all doctors</a></li>
     </form>
-
 
     <form sec:authorize="hasRole('ROLE_DOCTOR')">
         <h2> Doctors Menu</h2>
         <br/>
-        <li>
-            <a href="/doctor/search_choice">View sorted appointments by doctor</a>
-        </li>
+        <li> <a href="/doctor/search_choice">View sorted appointments by doctor</a></li>
         <br/>
-        <li>
-            <a href="/appointment/show-all">Show all appointments</a>
-        </li>
+        <li> <a href="/appointment/show-all">Show all appointments</a></li>
         <br/>
-        <li>
-            <a href="/patient/show">Show all patients</a>
-        </li>
-
+        <li> <a href="/patient/show">Show all patients</a></li>
     </form>
-
 
     <form sec:authorize="hasRole('ROLE_ADMIN')">
         <h2> Admins Menu</h2>
         <br/>
-        <li>
-            <a href="/register-doctor">Add new doctor</a>
-        </li>
+        <li> <a href="/register-doctor">Add new doctor</a></li>
         <br/>
-        <li>
-            <a href="/register-admin">Add new admin</a>
-        </li>
+        <li> <a href="/register-admin">Add new admin</a></li>
         <br/>
-        <li>
-            <a href="/patient/show">Show all patients</a>
-        </li>
+        <li> <a href="/patient/show">Show all patients</a></li>
         <br/>
-        <li>
-            <a href="/doctor/show">Show all doctors</a>
-        </li>
-
+        <li> <a href="/doctor/show">Show all doctors</a></li>
         <br/>
-        <li>
-            <a href="/doctor/search_choice">View sorted appointments by doctor</a>
-        </li>
-
+        <li> <a href="/doctor/search_choice">View sorted appointments by doctor</a></li>
         <br/>
-        <li>
-            <a href="/appointment/show-all">Show all appointments</a>
-        </li>
+        <li> <a href="/appointment/show-all">Show all appointments</a></li>
         <br/>
-        <li>
-            Grouping patient appointments by:
-           <a href="/grouping/by_doctor">doctor</a> |
-            <a href="/grouping/by_date">date</a> |
-             <a href="/grouping/by_department">department</a>
+        <li> Grouping patient appointments by:
+            <a href="/grouping/by_doctor">Doctor</a> |
+            <a href="/grouping/by_date">Date</a> |
+            <a href="/grouping/by_department">Department</a>
         </li>
-
     </form>
 
 </body>

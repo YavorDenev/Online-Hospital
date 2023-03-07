@@ -3,6 +3,7 @@ package DigRz.OnlineHospital.controllers;
 import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
+import DigRz.OnlineHospital.repositories.UserRepository;
 import DigRz.OnlineHospital.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
     private DoctorService doctorService;
@@ -29,9 +32,23 @@ public class DoctorController {
         return "doctor/list";
     }
 
+
+//    @GetMapping("/edit/{id}")
+//    private String editDoctor (@PathVariable(name = "id") Long id, Model m) {
+//        m.addAttribute("specialtyList", Specialty.values());
+//        return "/doctor/edit";
+//    }
+//    @PostMapping("/edit")
+//    private String updateDoctor(@Valid Doctor doctor, BindingResult bindingResult){
+//        if (bindingResult.hasErrors()) return "/doctor/edit";
+//        doctorRepository.save(doctor);
+//        return "redirect:/appointment/show";
+//    }
+
+
     @PostMapping("/delete/{id}")
     private String deleteDoctor (@PathVariable(name = "id") Long id) {
-        doctorRepository.deleteById(id);
+        doctorService.deleteDoctorAndHisAppointments(id);
         return "redirect:/doctor/show";
     }
 
@@ -54,6 +71,7 @@ public class DoctorController {
     @PostMapping("/submit_choice")
     private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
         m.addAttribute("appointmentList", doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod));
+        m.addAttribute("doctorInfo", doctorService.getDoctorInfo(doctorId));
         return "/doctor/list-apps";
     }
 
