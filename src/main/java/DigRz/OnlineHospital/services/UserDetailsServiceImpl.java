@@ -56,13 +56,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.setRole(Role.ROLE_DOCTOR);
         userRepo.save(user);
     }
-
-
     public Boolean isUserExist(String username) {
         User u = userRepo.getUserByUsername(username);
         return (u != null);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -72,6 +69,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return new MyUserDetails(user);
     }
-
 
 }

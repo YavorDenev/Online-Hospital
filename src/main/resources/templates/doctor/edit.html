@@ -1,14 +1,47 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit doctor</title>
 </head>
-<body>
-  <h2>Edit doctor</h2>
+<form th:action="@{/doctor/edit}" th:object="${doctor}" method="post">
+    <h2>Edit doctor</h2><br/>
 
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{user}">
 
+    <p>First Name:
+        <input type="text" th:field="*{firstName}" placeholder="firstName" minlength="2" maxlength="30" required/>
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red">password error</span><br/><br/>
+    </p><br/>
 
+    <p>Last Name:
+        <input type="text" th:field="*{lastName}" placeholder="lastName" minlength="2" maxlength="30" required/>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color:red">password error</span><br/><br/>
+    </p><br/>
 
+    <p>Specialty:
+        <select th:field="*{specialty}" required>
+            <option th:each="yyy : ${specialtyList}"
+                    th:value="${yyy.value}"
+                    th:text="${yyy.value}">
+            </option>
+        </select>
+        <span th:if="${#fields.hasErrors('specialty')}" th:errors="*{specialty}" style="color:red">password error</span><br/><br/>
+    </p><br/>
+
+    <button type="submit">Edit doctor</button>
+    <br/>
+    <br/>
+    <br/>
+
+    <a th:href="@{/}">Back to main menu</a></a>
+    <br/>
+    <br/>
+
+    <span th:utext="${successMessage}"></span>
+
+</form>
 </body>
 </html>
