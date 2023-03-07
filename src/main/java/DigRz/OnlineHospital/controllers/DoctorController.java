@@ -1,8 +1,10 @@
 package DigRz.OnlineHospital.controllers;
 
 import DigRz.OnlineHospital.entities.Doctor;
+import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
+import DigRz.OnlineHospital.repositories.UserRepository;
 import DigRz.OnlineHospital.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
     private DoctorService doctorService;
@@ -29,9 +33,34 @@ public class DoctorController {
         return "doctor/list";
     }
 
+
+//    @GetMapping("/edit/{id}")
+//    private String editAppointmentDateTime (@PathVariable(name = "id") Long id, Model m) {
+//        m.addAttribute("appointment", appointmentRepository.findById(id));
+//        m.addAttribute("days",utils.generateListOfDays());
+//        m.addAttribute("hours",utils.generateListOfHours());
+//        return "/appointment/edit";
+//    }
+//
+//    @PostMapping("/edit")
+//    private String updateAppointmentDateTime(@Valid Appointment appointment, BindingResult bindingResult, Model m){
+//        m.addAttribute("days",utils.generateListOfDays());
+//        m.addAttribute("hours",utils.generateListOfHours());
+//        if (bindingResult.hasErrors()) return "/appointment/edit";
+//
+//        String message = appointmentService.verifyIfHourIsBusy(appointment);
+//        m.addAttribute("successMessage", message);
+//        if ( !(message.equals("")) ) return "/appointment/edit";
+//
+//        appointmentService.saveNewAppointment(appointment);
+//        return "redirect:/appointment/show";
+//    }
+
     @PostMapping("/delete/{id}")
     private String deleteDoctor (@PathVariable(name = "id") Long id) {
+        User user = doctorService.getDoctorById(id).getUser();
         doctorRepository.deleteById(id);
+        userRepository.delete(user);
         return "redirect:/doctor/show";
     }
 
