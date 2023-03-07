@@ -10,8 +10,12 @@
         crossorigin="anonymous">
 </head>
 <body>
-<div class="col-md-10" align="center">
-  <h2>Appointments list</h2>
+  <div class="col-md-9" align="center">
+
+  <h2>Appointments list for doctor
+      <a th:text="' ' + ${doctorInfo}"></a>
+  </h2>
+
   <br/>
   <a th:href="@{/}">Back to main menu</a>
   <br/>
@@ -20,18 +24,18 @@
   <table class="table table-bordered" >
     <thead>
     <tr class="table-light">
-<!--      <th>Appointment Id</th>-->
+      <th>Appointment Id</th>
 
       <th>Patient Id</th>
       <th>Patient Last Name</th>
       <th>Patient First Name</th>
       <th>Patient Age</th>
 
-      <th>Doctor Id</th>
-      <th>Doctor Names</th>
+<!--      <th>Doctor Id</th>-->
+<!--      <th>Doctor Names</th>-->
 <!--      <th>Doctor First Name</th>-->
 <!--      <th>Doctor Last Name</th>-->
-      <th>Specialty</th>
+<!--      <th>Specialty</th>-->
 
       <th>Type of examination</th>
       <th>Date</th>
@@ -42,18 +46,18 @@
 
     <tbody>
     <tr class="table-active" th:each="xxx : ${appointmentList}">
-<!--      <td th:text="${xxx.id}"></td>-->
+      <td th:text="${xxx.id}"></td>
 
       <td th:text="${xxx.patient.id}"></td>
       <td th:text="${xxx.patient.lastName}"></td>
       <td th:text="${xxx.patient.firstName}"></td>
       <td th:text="${xxx.patient.age}"></td>
 
-      <td th:text="${xxx.doctor.id}"></td>
-      <td th:text="${xxx.doctor.firstName} + ' ' + ${xxx.doctor.lastName}"></td>
+<!--      <td th:text="${xxx.doctor.id}"></td>-->
+<!--      <td th:text="${xxx.doctor.firstName} + ' ' + ${xxx.doctor.lastName}"></td>-->
 <!--      <td th:text="${xxx.doctor.firstName}"></td>-->
 <!--      <td th:text="${xxx.doctor.lastName}"></td>-->
-      <td th:text="${xxx.doctor.specialty}"></td>
+<!--      <td th:text="${xxx.doctor.specialty}"></td>-->
 
       <td th:text="${xxx.examination}"></td>
       <td th:text="${xxx.myDate}"></td>

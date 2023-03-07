@@ -16,20 +16,17 @@ public class GroupingController {
 
     @GetMapping("/by_doctor")
     private String groupByDoctor (Model m) {
-
         m.addAttribute("doctorList", groupingService.findPatientsCountByDoctor());
         return "grouping/by_doctor";
     }
     @GetMapping("/by_date")
     private String groupByDate (Model m) {
-
         m.addAttribute("dateList", groupingService.findPatientsCountByDate());
         return "grouping/by_date";
     }
 
     @GetMapping("/by_department")
     private String groupByDepartment (Model m) {
-
         m.addAttribute("departmentList", groupingService.findPatientsCountByDepartment());
         return "grouping/by_department";
     }

@@ -39,8 +39,7 @@ public class DoctorService {
     }
 
     public List<Appointment> getSortedAppointments (Long doctorId, int sortCriteria, int sortMethod) {
-        Doctor doctor = getCurrentDoctor();
-        if (doctorId != 0) doctor = doctorRepository.findById(doctorId).get();
+        Doctor doctor = getDoctorById(doctorId);
         List<Appointment> appointments = appointmentRepository.findByDoctorOrderByPatientId(doctor);
         switch (sortCriteria) {
             case 1 -> appointments.sort(Comparator.comparing(Appointment::getPatientNames));
@@ -52,10 +51,20 @@ public class DoctorService {
         return appointments;
     }
 
-    public Doctor getCurrentDoctor () {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.getUserByUsername((auth.getName()));
-        return doctorRepository.findByUser(user);
+    public Doctor getDoctorById(Long doctorId) {
+        Doctor doctor;
+        if (doctorId != 0) {
+            doctor = doctorRepository.findById(doctorId).get();
+        } else {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userRepository.getUserByUsername((auth.getName()));
+            doctor = doctorRepository.findByUser(user);
+        }
+        return doctor;
     }
 
+    public String getDoctorInfo(Long doctorId) {
+        Doctor doctor = getDoctorById(doctorId);
+        return " " + doctor.getFirstName() + " " + doctor.getLastName() + " with specialty " + doctor.getSpecialty() + " and ID " + doctor.getId();
+    }
 }

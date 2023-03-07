@@ -54,6 +54,7 @@ public class DoctorController {
     @PostMapping("/submit_choice")
     private String submitDoctorInputs (Model m, Long doctorId, int sortCriteria, int sortMethod) {
         m.addAttribute("appointmentList", doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod));
+        m.addAttribute("doctorInfo", doctorService.getDoctorInfo(doctorId));
         return "/doctor/list-apps";
     }
 
