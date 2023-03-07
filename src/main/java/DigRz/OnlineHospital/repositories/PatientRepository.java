@@ -5,7 +5,6 @@ import DigRz.OnlineHospital.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-    public Patient findByUser(User user);
-
+    Patient findByUser(User user);
 
 }
