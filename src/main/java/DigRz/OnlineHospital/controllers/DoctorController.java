@@ -1,5 +1,6 @@
 package DigRz.OnlineHospital.controllers;
 
+import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/doctor")
@@ -58,6 +61,8 @@ public class DoctorController {
 
     @PostMapping("/delete/{id}")
     private String deleteDoctor (@PathVariable(name = "id") Long id) {
+        List<Appointment> appointmentList = appointmentRepository.findByDoctorId(id);
+        appointmentRepository.deleteAll(appointmentList);
         User user = doctorService.getDoctorById(id).getUser();
         doctorRepository.deleteById(id);
         userRepository.delete(user);
