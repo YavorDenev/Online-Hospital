@@ -16,22 +16,17 @@ import javax.validation.Valid;
 
 @Controller
 public class AuthController {
-
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-
     @Autowired
     private PatientService patientService;
-
     @Autowired
     private DoctorService doctorService;
-
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login(){
         return "login";
     }
-
 
     @RequestMapping(value = {"/register-patient"}, method = RequestMethod.GET)
     public String registerPatient(Model model){
@@ -53,7 +48,6 @@ public class AuthController {
         patientService.savePatient(patientReg);
         return "login";
     }
-
 
     @RequestMapping(value = {"/register-doctor"}, method = RequestMethod.GET)
     public String registerDoctor(Model model){
@@ -77,7 +71,6 @@ public class AuthController {
         return "/index";
     }
 
-
     @RequestMapping(value = {"/register-admin"}, method = RequestMethod.GET)
     public String registerAdmin(Model model){
         model.addAttribute("user", new User());
@@ -97,7 +90,6 @@ public class AuthController {
         userDetailsService.saveUserAsAdmin(user);
         return "/index";
     }
-
 
     @RequestMapping(value = {"/register-first-user"}, method = RequestMethod.GET)
     public String register(Model model){

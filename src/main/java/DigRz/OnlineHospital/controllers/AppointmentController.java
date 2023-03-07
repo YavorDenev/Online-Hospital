@@ -3,16 +3,11 @@ package DigRz.OnlineHospital.controllers;
 import DigRz.OnlineHospital.constants.Examination;
 import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Patient;
-import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
-import DigRz.OnlineHospital.repositories.PatientRepository;
-import DigRz.OnlineHospital.repositories.UserRepository;
 import DigRz.OnlineHospital.services.AppointmentService;
 import DigRz.OnlineHospital.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,17 +28,11 @@ public class AppointmentController {
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
-    private PatientRepository patientRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private AppointmentService appointmentService;
 
     @GetMapping("/show")
     private String showPatientAppointments (Model m) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.getUserByUsername((auth.getName()));
-        Patient patient = patientRepository.findByUser(user);
+        Patient patient = appointmentService.getCurrentPatient();
         m.addAttribute("appointmentList", appointmentRepository.findByPatient(patient));
         return "appointment/list";
     }

@@ -1,11 +1,9 @@
 package DigRz.OnlineHospital.services;
 
 import DigRz.OnlineHospital.entities.Appointment;
-
 import DigRz.OnlineHospital.entities.Patient;
 import DigRz.OnlineHospital.entities.User;
 import DigRz.OnlineHospital.repositories.AppointmentRepository;
-import DigRz.OnlineHospital.repositories.DoctorRepository;
 import DigRz.OnlineHospital.repositories.PatientRepository;
 import DigRz.OnlineHospital.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +19,6 @@ public class AppointmentService {
     private UserRepository userRepository;
     @Autowired
     private PatientRepository patientRepository;
-    @Autowired
-    private DoctorRepository doctorRepository;
 
     public String verifyIfHourIsBusy(Appointment appointment) {
         String date = appointment.getMyDate();
@@ -52,6 +48,5 @@ public class AppointmentService {
         User user = userRepository.getUserByUsername((auth.getName()));
         return patientRepository.findByUser(user);
     }
-
 
 }

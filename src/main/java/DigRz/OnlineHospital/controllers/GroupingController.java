@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/grouping")
 public class GroupingController {
-
     @Autowired
     private GroupingService groupingService;
 

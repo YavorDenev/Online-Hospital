@@ -19,7 +19,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/doctor")
 public class DoctorController {
-
     @Autowired
     private DoctorRepository doctorRepository;
     @Autowired
