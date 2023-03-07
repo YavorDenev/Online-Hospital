@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Grouping patient appointments by doctor</title>
+    <script src=https://code.jquery.com/jquery-3.6.0.js></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="col-md-6" align="center">
+<h2>Grouping patient appointments by doctor</h2>
+    <a th:href="@{/}">Back to main menu</a>
+    <br/>
+    <br/>
+    <table class="table table-bordered">
+    <thead>
+    <tr class="table-light">
+        <th>Doctor Id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Patients count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="table-active" th:each="d : ${doctorList}">
+        <td th:text="${d.key.id}" />
+        <td th:text="${d.key.firstName}" />
+        <td th:text="${d.key.lastName}" />
+        <td th:text="${d.value}" />
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
