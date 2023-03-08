@@ -1,6 +1,8 @@
 package DigRz.OnlineHospital.unit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 import DigRz.OnlineHospital.dto.DoctorReg;
 import DigRz.OnlineHospital.entities.Appointment;
@@ -15,9 +17,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.context.SecurityContext;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class DoctorServiceTest {
@@ -32,6 +36,9 @@ public class DoctorServiceTest {
 
     @Mock
     AppointmentRepository appointmentRepository;
+
+    @Mock
+    private SecurityContext securityContext;
 
     @Test
     public void testSaveDoctor() {
@@ -88,6 +95,38 @@ public class DoctorServiceTest {
         verify(doctorRepository).deleteById(doctorId);
         verify(userRepository).delete(user);
     }
+
+    @Test
+    public void testGetDoctorById() {
+        Long doctorId = 1L;
+        Doctor doctor = new Doctor();
+        doctor.setId(doctorId);
+        when(doctorRepository.findById(doctorId)).thenReturn(Optional.of(doctor));
+
+        Doctor result = doctorService.getDoctorById(doctorId);
+
+        assertNotNull(result);
+        assertEquals(doctorId, result.getId());
+        verify(doctorRepository, times(1)).findById(doctorId);
+    }
+
+//    @Test
+//    public void testGetDoctorByIdWithLoggedInUser() {
+//        Long doctorId = 0L;
+//        String username = "testUser";
+//        User user = new User();
+//        Doctor doctor = new Doctor();
+//        when(securityContext.getAuthentication()).thenReturn(mock(Authentication.class));
+//        SecurityContextHolder.setContext(securityContext);
+//        when(userRepository.getUserByUsername(username)).thenReturn(user);
+//        when(doctorRepository.findByUser(user)).thenReturn(doctor);
+//
+//        Doctor result = doctorService.getDoctorById(doctorId);
+//
+//        assertNotNull(result);
+//        verify(userRepository, times(1)).getUserByUsername(username);
+//        verify(doctorRepository, times(1)).findByUser(user);
+//    }
 
 
 }
