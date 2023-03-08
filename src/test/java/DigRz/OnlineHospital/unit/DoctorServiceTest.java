@@ -2,7 +2,6 @@ package DigRz.OnlineHospital.unit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 import DigRz.OnlineHospital.dto.DoctorReg;
 import DigRz.OnlineHospital.entities.Appointment;
@@ -37,8 +36,8 @@ public class DoctorServiceTest {
     @Mock
     AppointmentRepository appointmentRepository;
 
-    @Mock
-    private SecurityContext securityContext;
+//    @Mock
+//    private SecurityContext securityContext;
 
     @Test
     public void testSaveDoctor() {
