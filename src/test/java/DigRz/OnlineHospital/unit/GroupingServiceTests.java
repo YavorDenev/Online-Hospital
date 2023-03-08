@@ -1,4 +1,4 @@
-package DigRz.OnlineHospital;
+package DigRz.OnlineHospital.unit;
 import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Doctor;
 import DigRz.OnlineHospital.entities.Patient;

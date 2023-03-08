@@ -11,7 +11,7 @@
 
   <p>Doctor:
     <select th:field="*{doctor}">
-      <option th:each="d : ${doctors}"
+      <option th:each="d : ${doc.tors}"
               th:value="${d.id}"
               th:text="${d.firstName} + ' ' + ${d.lastName} + ': ' + ${d.specialty}">
       </option>
