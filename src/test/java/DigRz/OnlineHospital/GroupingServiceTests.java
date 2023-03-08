@@ -6,10 +6,13 @@ import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.DoctorRepository;
 import DigRz.OnlineHospital.services.GroupingService;
 import DigRz.OnlineHospital.utils.Utils;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,8 +23,13 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class GroupingServiceTests {
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        //this.initialSetup();
+    }
     @Mock
     AppointmentRepository appointmentRepository;
 
@@ -57,7 +65,6 @@ public class GroupingServiceTests {
         String today = "2023-03-08";
         List<Appointment> appointments = new ArrayList<>();
         appointment1.setMyDate(today);
-        System.out.println(appointment1.getMyDate());
         appointment2.setMyDate(today);
         appointment3.setMyDate(today);
         appointment4.setMyDate("2023-03-07");
@@ -82,7 +89,6 @@ public class GroupingServiceTests {
         LocalDate day2 = LocalDate.parse("2023-03-07");
         List<Appointment> appointments = new ArrayList<>();
         appointment1.setMyDate(day1.toString());
-        System.out.println(appointment1.getMyDate());
         appointment2.setMyDate(day1.toString());
         appointment3.setMyDate(day1.toString());
         appointment4.setMyDate(day2.toString());
