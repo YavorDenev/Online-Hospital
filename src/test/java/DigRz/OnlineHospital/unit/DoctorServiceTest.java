@@ -110,7 +110,7 @@ public class DoctorServiceTest {
     }
 
     @Test
-    void testGetDoctorByIdWithAuthTest() {
+    void testGetDoctorByIdWithAuth() {
         Doctor doctor = new Doctor();
         doctor.setId(1L);
         doctor.setFirstName("Ivo");
