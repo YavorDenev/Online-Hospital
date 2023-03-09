@@ -101,7 +101,6 @@ public class GroupingServiceTests {
         appointments.add(appointment3);
         appointments.add(appointment4);
         when(appointmentRepository.findAll()).thenReturn(appointments);
-        when(appointmentRepository.findAll()).thenReturn(appointments);
         List<LocalDate> days = new ArrayList<>();
         days.add(day1);
         days.add(day2);
@@ -112,7 +111,6 @@ public class GroupingServiceTests {
 
 
         //List<Appointment> appointments = new ArrayList<>();
-        when(appointmentRepository.findAll()).thenReturn(appointments);
 
         Map<String, Long> patientsCount = groupingService.findPatientsCountByDate();
 
