@@ -91,11 +91,19 @@ public class UserDetailsServiceImplTests {
     }
 
     @Test
-    public void testIsUserExistTest() {
+    public void testIsUserExistWhenExists() {
         String username = "username";
         when(userRepository.getUserByUsername(username)).thenReturn(new User());
 
         assertTrue(userDetailsService.isUserExist(username));
+    }
+
+    @Test
+    public void testIsUserExistWhenNotExists() {
+        String username = "no_such_user";
+        when(userRepository.getUserByUsername(username)).thenReturn(null);
+
+        assertFalse(userDetailsService.isUserExist(username));
     }
 
     @Test
