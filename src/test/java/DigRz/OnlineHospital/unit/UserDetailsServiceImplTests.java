@@ -1,9 +1,7 @@
 package DigRz.OnlineHospital.unit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 import DigRz.OnlineHospital.constants.Role;
 import DigRz.OnlineHospital.dto.DoctorReg;
 import DigRz.OnlineHospital.dto.PatientReg;
@@ -16,6 +14,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @ExtendWith(MockitoExtension.class)
@@ -91,11 +91,42 @@ public class UserDetailsServiceImplTests {
     }
 
     @Test
-    public void testIsUserExistTest() {
+    public void testIsUserExistWhenExists() {
         String username = "username";
         when(userRepository.getUserByUsername(username)).thenReturn(new User());
 
         assertTrue(userDetailsService.isUserExist(username));
+    }
+
+    @Test
+    public void testIsUserExistWhenNotExists() {
+        String username = "no_such_user";
+        when(userRepository.getUserByUsername(username)).thenReturn(null);
+
+        assertFalse(userDetailsService.isUserExist(username));
+    }
+
+    @Test
+    void testLoadUserByUsername_ShouldReturnUserDetails_WhenUserExists() {
+        String username = "username";
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword("password");
+        user.setRole(Role.ROLE_PATIENT);
+        when(userRepository.getUserByUsername(username)).thenReturn(user);
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        assertEquals(user.getUsername(), userDetails.getUsername());
+        assertEquals(user.getPassword(), userDetails.getPassword());
+    }
+
+    @Test
+    void testLoadUserByUsername_ShouldThrowUsernameNotFoundException_WhenUserDoesNotExist() {
+        String username = "username";
+        when(userRepository.getUserByUsername(username)).thenReturn(null);
+
+        assertThrows(UsernameNotFoundException.class, () -> userDetailsService.loadUserByUsername(username));
     }
 
 }
