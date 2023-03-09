@@ -49,7 +49,6 @@ public class DoctorServiceTest {
 
         User user = new User();
         user.setUsername("ivo123");
-
         when(userRepository.getUserByUsername("ivo123")).thenReturn(user);
 
         doctorService.saveDoctor(doctorReg);
@@ -163,7 +162,7 @@ public class DoctorServiceTest {
     void testGetSortedAppointmentsBySecondCriteria() {
         Long doctorId = 1L;
         int sortCriteria = 2;
-        int sortMethod = 2;
+        int sortMethod = 1;
         Doctor doctor = new Doctor();
         doctor.setId(1L);
 
@@ -178,9 +177,33 @@ public class DoctorServiceTest {
 
         List<Appointment> sortedAppointments = doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod);
 
-        assertEquals(sortedAppointments.get(0), appointment1);
-        assertEquals(sortedAppointments.get(1), appointment2);
+        assertEquals(sortedAppointments.get(0), appointment2);
+        assertEquals(sortedAppointments.get(1), appointment1);
         verify(doctorRepository, times(1)).findById(doctorId);
         verify(appointmentRepository, times(1)).findByDoctorOrderByPatientId(doctor);
     }
+
+    @Test
+    void testGetSortedAppointmentsByThirdCriteria() {
+        Long doctorId = 1L;
+        int sortCriteria = 3;
+        int sortMethod = 2;
+        Doctor doctor = new Doctor();
+        doctor.setId(1L);
+
+        List<Appointment> appointments = new ArrayList<>();
+        appointments.add(appointment1);
+        appointments.add(appointment2);
+
+        when(doctorRepository.findById(doctorId)).thenReturn(java.util.Optional.of(doctor));
+        when(appointmentRepository.findByDoctorOrderByPatientId(doctor)).thenReturn(appointments);
+
+        List<Appointment> sortedAppointments = doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod);
+
+        assertEquals(sortedAppointments.get(0), appointment2);
+        assertEquals(sortedAppointments.get(1), appointment1);
+        verify(doctorRepository, times(1)).findById(doctorId);
+        verify(appointmentRepository, times(1)).findByDoctorOrderByPatientId(doctor);
+    }
+
 }
