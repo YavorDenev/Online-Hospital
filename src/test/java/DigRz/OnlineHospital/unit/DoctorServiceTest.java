@@ -3,6 +3,7 @@ package DigRz.OnlineHospital.unit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
+import DigRz.OnlineHospital.constants.Role;
 import DigRz.OnlineHospital.dto.DoctorReg;
 import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Doctor;
@@ -16,7 +17,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +26,31 @@ import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
 public class DoctorServiceTest {
-
     @Mock
     private DoctorRepository doctorRepository;
     @Mock
     private UserRepository userRepository;
-
     @InjectMocks
     private DoctorService doctorService;
-
     @Mock
     AppointmentRepository appointmentRepository;
-
-//    @Mock
-//    private SecurityContext securityContext;
+    @Mock
+    Appointment appointment1;
+    @Mock
+    Appointment appointment2;
 
     @Test
     public void testSaveDoctor() {
         DoctorReg doctorReg = new DoctorReg();
-        doctorReg.setFirstName("John");
-        doctorReg.setLastName("Doe");
+        doctorReg.setFirstName("Ivo");
+        doctorReg.setLastName("Velev");
         doctorReg.setSpecialty("Cardiology");
-        doctorReg.setUsername("johndoe");
+        doctorReg.setUsername("ivo123");
 
         User user = new User();
-        user.setUsername("johndoe");
+        user.setUsername("ivo123");
 
-        when(userRepository.getUserByUsername("johndoe")).thenReturn(user);
+        when(userRepository.getUserByUsername("ivo123")).thenReturn(user);
 
         doctorService.saveDoctor(doctorReg);
 
@@ -60,8 +60,8 @@ public class DoctorServiceTest {
     @Test
     public void testGetDoctorInfo() {
         Long doctorId = 1L;
-        String firstName = "John";
-        String lastName = "Doe";
+        String firstName = "Ivo";
+        String lastName = "Velev";
         String specialty = "Cardiology";
         Doctor doctor = new Doctor();
         doctor.setId(doctorId);
@@ -109,23 +109,78 @@ public class DoctorServiceTest {
         verify(doctorRepository, times(1)).findById(doctorId);
     }
 
-//    @Test
-//    public void testGetDoctorByIdWithLoggedInUser() {
-//        Long doctorId = 0L;
-//        String username = "testUser";
-//        User user = new User();
-//        Doctor doctor = new Doctor();
-//        when(securityContext.getAuthentication()).thenReturn(mock(Authentication.class));
-//        SecurityContextHolder.setContext(securityContext);
-//        when(userRepository.getUserByUsername(username)).thenReturn(user);
-//        when(doctorRepository.findByUser(user)).thenReturn(doctor);
-//
-//        Doctor result = doctorService.getDoctorById(doctorId);
-//
-//        assertNotNull(result);
-//        verify(userRepository, times(1)).getUserByUsername(username);
-//        verify(doctorRepository, times(1)).findByUser(user);
-//    }
+    @Test
+    void testGetDoctorByIdWithAuthTest() {
+        Doctor doctor = new Doctor();
+        doctor.setId(1L);
+        doctor.setFirstName("Ivo");
+        doctor.setLastName("Velev");
+        doctor.setSpecialty("Cardiology");
 
+        Authentication auth = mock(Authentication.class);
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
+        User user = new User();
+        user.setUsername("user1");
+        user.setPassword("password");
+        user.setRole(Role.ROLE_DOCTOR);
+
+        when(auth.getName()).thenReturn("user1");
+        when(userRepository.getUserByUsername("user1")).thenReturn(user);
+        when(doctorRepository.findByUser(user)).thenReturn(doctor);
+
+        Doctor result = doctorService.getDoctorById(0L);
+
+        assertEquals(doctor, result);
+    }
+
+    @Test
+    void testGetSortedAppointmentsByFirstCriteria() {
+        Long doctorId = 1L;
+        int sortCriteria = 1;
+        int sortMethod = 1;
+        Doctor doctor = new Doctor();
+        doctor.setId(1L);
+
+        List<Appointment> appointments = new ArrayList<>();
+        when(appointment1.getPatientNames()).thenReturn("Ivanov Ivo");
+        appointments.add(appointment1);
+        when(appointment2.getPatientNames()).thenReturn("Petrov Asen");
+        appointments.add(appointment2);
+
+        when(doctorRepository.findById(doctorId)).thenReturn(java.util.Optional.of(doctor));
+        when(appointmentRepository.findByDoctorOrderByPatientId(doctor)).thenReturn(appointments);
+
+        List<Appointment> sortedAppointments = doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod);
+
+        assertEquals(sortedAppointments.get(0), appointment1);
+        assertEquals(sortedAppointments.get(1), appointment2);
+        verify(doctorRepository, times(1)).findById(doctorId);
+        verify(appointmentRepository, times(1)).findByDoctorOrderByPatientId(doctor);
+    }
+
+    @Test
+    void testGetSortedAppointmentsBySecondCriteria() {
+        Long doctorId = 1L;
+        int sortCriteria = 2;
+        int sortMethod = 2;
+        Doctor doctor = new Doctor();
+        doctor.setId(1L);
+
+        List<Appointment> appointments = new ArrayList<>();
+        when(appointment1.getTimeComparingKey()).thenReturn("2023-03-27 10:30");
+        appointments.add(appointment1);
+        when(appointment2.getTimeComparingKey()).thenReturn("2023-03-20 15:30");
+        appointments.add(appointment2);
+
+        when(doctorRepository.findById(doctorId)).thenReturn(java.util.Optional.of(doctor));
+        when(appointmentRepository.findByDoctorOrderByPatientId(doctor)).thenReturn(appointments);
+
+        List<Appointment> sortedAppointments = doctorService.getSortedAppointments(doctorId, sortCriteria, sortMethod);
+
+        assertEquals(sortedAppointments.get(0), appointment1);
+        assertEquals(sortedAppointments.get(1), appointment2);
+        verify(doctorRepository, times(1)).findById(doctorId);
+        verify(appointmentRepository, times(1)).findByDoctorOrderByPatientId(doctor);
+    }
 }
