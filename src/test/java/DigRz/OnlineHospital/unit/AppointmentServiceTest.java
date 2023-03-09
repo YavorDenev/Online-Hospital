@@ -8,7 +8,6 @@ import DigRz.OnlineHospital.repositories.AppointmentRepository;
 import DigRz.OnlineHospital.repositories.PatientRepository;
 import DigRz.OnlineHospital.repositories.UserRepository;
 import DigRz.OnlineHospital.services.AppointmentService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,6 +16,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,6 +32,64 @@ public class AppointmentServiceTest {
     private PatientRepository patientRepository;
     @Mock
     AppointmentRepository appointmentRepository;
+    @Mock
+    private Appointment appointment;
+
+    @Test
+    public void testVerifyIfHourIsBusyFromPatient() {
+        List<Appointment> appointments = new ArrayList<>();
+        appointments.add(appointment);
+
+        when(appointmentRepository.findByPatientAndMyDateAndMyTime(any(), any(), any())).thenReturn(appointments);
+
+        Authentication auth = mock(Authentication.class);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        Patient patient = new Patient();
+        when(appointmentService.getCurrentPatient()).thenReturn(patient);
+
+        String result = appointmentService.verifyIfHourIsBusy(appointment);
+
+        assertEquals("You have an appointment reserved for the same time. Choose another hour!", result);
+        verify(appointmentRepository, times(1)).findByPatientAndMyDateAndMyTime(any(), any(), any());
+        verify(appointmentRepository, times(0)).findByDoctorAndMyDateAndMyTime(any(), any(), any());
+    }
+
+    @Test
+    public void testVerifyIfHourIsBusyFromDoctor() {
+        List<Appointment> appointments = new ArrayList<>();
+        appointments.add(appointment);
+
+        when(appointmentRepository.findByPatientAndMyDateAndMyTime(any(), any(), any())).thenReturn(new ArrayList<>());
+        when(appointmentRepository.findByDoctorAndMyDateAndMyTime(any(), any(), any())).thenReturn(appointments);
+
+        Authentication auth = mock(Authentication.class);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        Patient patient = new Patient();
+        when(appointmentService.getCurrentPatient()).thenReturn(patient);
+
+        String result = appointmentService.verifyIfHourIsBusy(appointment);
+
+        assertEquals("This doctor is busy at this time. Choose another hour!", result);
+        verify(appointmentRepository, times(1)).findByPatientAndMyDateAndMyTime(any(), any(), any());
+        verify(appointmentRepository, times(1)).findByDoctorAndMyDateAndMyTime(any(), any(), any());
+    }
+
+    @Test
+    public void testVerifyIfHourIsBusyWhenIsFree() {
+        when(appointmentRepository.findByPatientAndMyDateAndMyTime(any(), any(), any())).thenReturn(new ArrayList<>());
+        when(appointmentRepository.findByDoctorAndMyDateAndMyTime(any(), any(), any())).thenReturn(new ArrayList<>());
+
+        Authentication auth = mock(Authentication.class);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        Patient patient = new Patient();
+        when(appointmentService.getCurrentPatient()).thenReturn(patient);
+
+        String result = appointmentService.verifyIfHourIsBusy(appointment);
+
+        assertEquals("", result);
+        verify(appointmentRepository, times(1)).findByPatientAndMyDateAndMyTime(any(), any(), any());
+        verify(appointmentRepository, times(1)).findByDoctorAndMyDateAndMyTime(any(), any(), any());
+    }
 
     @Test
     public void testGetCurrentPatient() {
@@ -49,7 +110,7 @@ public class AppointmentServiceTest {
 
         Patient result = appointmentService.getCurrentPatient();
 
-        Assertions.assertEquals(patient, result);
+        assertEquals(patient, result);
     }
 
     @Test
