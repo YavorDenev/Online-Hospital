@@ -56,6 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.setRole(Role.ROLE_DOCTOR);
         userRepo.save(user);
     }
+
     public Boolean isUserExist(String username) {
         User u = userRepo.getUserByUsername(username);
         return (u != null);
