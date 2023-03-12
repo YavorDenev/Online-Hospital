@@ -3,19 +3,31 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>Login</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
-
-<h2 th:inline="text">Welcome in our online hospital!</h2>
+<div id="masthead">
+    <div id="logo"><img src="/images/logo.png" height="95"/></div>
+    <div id="logo1"><img src="https://digitalrazgrad.org/images/digital-razgrad-logo.png" height="120"/></div>
+    <div id="siteName">YAVOR & TURHAN Medica</div>
+</div>
+<div id="conteiner" align="center">
+    <div id = "feature">
+<h1 th:inline="text" align="center">Welcome in our online hospital!</h1>
 <br/>
 
 <form th:action="@{/login}" method="POST" class="form-signin">
     <h2 th:text="Login"></h2><br />
-    <p>Username: <input type="text" name="username" th:placeholder="Username"/></p>    <br />
-    <p>Password: <input type="password" name="password" th:placeholder="Password"/></p>     <br /><br />
+    <p>Username: <input type="text" name="username" th:placeholder="Username"/></p>
+    <p>Password: <input type="password" name="password" th:placeholder="Password"/></p>
     <button type="Submit" th:text="Login"></button><br /><br /><br />
     <a th:href="@{/register-patient}">Register as new patient</a><br /><br />
     <div th:if="${param.error}"><p>Username or Password is invalid.</p></div> <br />
 </form>
+    </div>
+    <div id="content" style="text-align: center;><div "><img src="images/hospital.jpg" alt="Разград" width=90% /></div>
+</div>
+
+<div id="siteInfo"> The site created as final project to "Digital Razgrad Course" by Yavor Denev and Turhan Syuleymanov.</div>
 </body>
 </html>
