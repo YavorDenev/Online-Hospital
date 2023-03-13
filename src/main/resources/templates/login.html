@@ -13,27 +13,38 @@
 <body>
 <div id="masthead">
     <div id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="95"/></a></div>
-    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png" height="95"/></a></div>
+    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png"
+                                                                               height="95"/></a></div>
     <div id="siteName">YAVOR & TURHAN Medica</div>
 </div>
 <div id="conteiner" align="center">
     <div id="feature">
+
         <h1 align="center">Welcome in our online hospital!</h1>
         <br/>
+        <div id="loginImage"> <img src="images/medical.png" height="240"/></div>
+        <div id="login">
+            <form th:action="@{/login}" method="POST" class="form-signin">
+                <h2 th:text="Login"></h2>
+                <br/>
+                <p>Username: <input type="text" name="username" th:placeholder="Username"/></p>
+                <p>Password: <input type="password" name="password" th:placeholder="Password"/></p>
 
-        <form th:action="@{/login}" method="POST" class="form-signin">
-            <h2 th:text="Login"></h2>
-            <br/>
-            <p>Username: <input type="text" name="username" th:placeholder="Username"/></p>
-            <p>Password: <input type="password" name="password" th:placeholder="Password"/></p>
+                <div th:if="${param.error}" style="color:red"><p>Username or Password is invalid.</p></div>
 
-            <div th:if="${param.error}" style="color:red"><p>Username or Password is invalid.</p></div>
-
-            <button class="btn btn-primary" type="Submit" th:text="Login"></button>
-            or
-            <a class="btn btn-light btn-outline-secondary" th:href="@{/register-patient}" style="color:blue">Register as new patient</a>
-            <br/><br/>
-        </form>
+                <button class="btn btn-primary" type="Submit" th:text="Login"></button>
+                or
+                <a class="btn btn-light btn-outline-secondary" th:href="@{/register-patient}" style="color:blue">Register
+                    as
+                    new patient</a>
+                <br/><br/>
+            </form>
+        </div>
+        <div id="loginText">Get top-quality healthcare from the comfort of your home with YAVOR & TURHAN Medica. Our experienced
+            doctors offer virtual consultations, online prescriptions, and medication delivery. We believe in accessible
+            healthcare, which is why we offer affordable pricing and accept most major insurance plans. Trust us for
+            personalized care and ongoing support. Sign up today and experience the convenience of online healthcare.
+        </div>
     </div>
     <div id="content" style="text-align: center;">
         <img src="images/hospital.jpg" alt="Hospital" width=90%/>

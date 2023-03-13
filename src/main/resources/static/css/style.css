@@ -120,7 +120,36 @@ label{
 	background-color: #FFFFFF;
     
 }
-
+#loginImage {
+    width: 33%;
+    border: 0px solid #cccccc;
+	float: left;
+	/*height:auto;*/
+	margin: 10px 10px 10px 20px;
+	padding: 0px 0px 0px 0px;
+	horizontal-align: text-center;
+}
+#login {
+    width: 20% auto;
+    border: 1px solid #cccccc;
+	float: left;
+	height:auto;
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	horizontal-align: text-center;
+}
+#loginText{
+    width: 40%;
+    height:auto;
+    float: right;
+	/*background-color: #eeeeee;*/
+	border: 0px solid #cccccc;
+	margin: 10px 20px 10px 10px;
+	padding: 5px 5px 5px 5px;
+	background-color: #ffffff;
+	text-align: justify;
+	horizontal-align: text-center;
+}
 #navBar{
 	/*background-color: #eeeeee;*/
 	border: 2px solid #ccc;
