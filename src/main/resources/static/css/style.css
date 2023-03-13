@@ -121,30 +121,30 @@ label{
     
 }
 #loginImage {
-    width: 33%;
+    width: 25%;
     border: 0px solid #cccccc;
 	float: left;
 	/*height:auto;*/
-	margin: 10px 10px 10px 20px;
+	margin: 10px 5% 10px 5%;
 	padding: 0px 0px 0px 0px;
 	horizontal-align: text-center;
 }
 #login {
-    width: 20% auto;
+    width: 25%;
     border: 1px solid #cccccc;
 	float: left;
 	height:auto;
-	margin: 10px 10px 10px 10px;
+	margin: 10px 0px 10px 0px;
 	padding: 10px 10px 10px 10px;
 	horizontal-align: text-center;
 }
 #loginText{
-    width: 37.5%;
+    width: 30%;
     height:auto;
     float: right;
 	/*background-color: #eeeeee;*/
 	border: 0px solid #cccccc;
-	margin: 10px 92px 10px 10px;
+	margin: 10px 5% 10px 4%;
 	padding: 5px 5px 5px 5px;
 	background-color: #ffffff;
 	text-align: justify;
