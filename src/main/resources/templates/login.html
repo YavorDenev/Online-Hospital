@@ -28,10 +28,12 @@
                 <h2 th:text="Login"></h2>
                 <br/>
                 <p>Username: <input type="text" name="username" th:placeholder="Username"/></p>
+                <br/>
                 <p>Password: <input type="password" name="password" th:placeholder="Password"/></p>
 
                 <div th:if="${param.error}" style="color:red"><p>Username or Password is invalid.</p></div>
 
+                <br/>
                 <button class="btn btn-primary" type="Submit" th:text="Login"></button>
                 or
                 <a class="btn btn-light btn-outline-secondary" th:href="@{/register-patient}" style="color:blue">Register
@@ -40,10 +42,13 @@
                 <br/><br/>
             </form>
         </div>
-        <div id="loginText">Get top-quality healthcare from the comfort of your home with YAVOR & TURHAN Medica. Our experienced
-            doctors offer virtual consultations, online prescriptions, and medication delivery. We believe in accessible
-            healthcare, which is why we offer affordable pricing and accept most major insurance plans. Trust us for
-            personalized care and ongoing support. Sign up today and experience the convenience of online healthcare.
+        <div id="loginText">Get top-quality healthcare from the comfort of your home with YAVOR & TURHAN Medica.<br/>
+            We offer a wide range of services, including virtual consultations, online prescriptions, and home delivery of medication.
+            Our platform is easy to use and convenient, allowing you to connect with a doctor and receive personalized treatment from
+            anywhere, at any time. <br/>
+            We believe in accessible healthcare, which is why we offer affordable pricing and accept most major insurance plans. <br/>
+            Trust us for personalized care and ongoing support. <br/>
+            Sign up today and experience the convenience of online healthcare.
         </div>
     </div>
     <div id="content" style="text-align: center;">
