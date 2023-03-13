@@ -139,12 +139,12 @@ label{
 	horizontal-align: text-center;
 }
 #loginText{
-    width: 40%;
+    width: 37.5%;
     height:auto;
     float: right;
 	/*background-color: #eeeeee;*/
 	border: 0px solid #cccccc;
-	margin: 10px 20px 10px 10px;
+	margin: 10px 92px 10px 10px;
 	padding: 5px 5px 5px 5px;
 	background-color: #ffffff;
 	text-align: justify;
