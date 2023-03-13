@@ -6,11 +6,11 @@ body{
 	margin: 0px;
 	padding: 0px;
 	font-size:18px;
-	background-color:#cccccc;
+	background-color:#ffffff;
 	/*BACKGROUND-IMAGE:url(images/body_bg.gif);
 	background-attachment:fixed;
 	background-repeat:repeat;*/
-	width: 99%;	
+	width: 100%;
 	}
 
 a:link, a:visited, a:hover {
@@ -82,16 +82,16 @@ label{
 /***********************************************/
 
 #masthead{
-	margin: 0px 5px 0px 5px;
-	padding: 10px 0px;
-	border: solid 1px #e0e0e0;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px;
+	border: solid 2px #0000af;
 	width: 100%;
 	height: 120px;
 	/*background-image: url(images/masthead_bg.jpg);
 	background-repeat: no-repeat;
 	background-position: top left;*/
 
-	background-color:#cccccc;
+	background-color:#ccffff;
 	visibility: visible;
 	display:block;
 	
@@ -99,24 +99,24 @@ label{
 #logo {
 	float: left;
 	height:auto;
-	margin: 0px 0px 0px 10px;
+	margin: 10px 10px 10px 10px;
 	padding: 0px 0px 0px 0px;
 	vertical-align: text-bottom;
 }
 
 #logo1 {
 	height:auto;
-	margin: 0px 10px 0px 0px;
+	margin: 10px 10px 10px 10px;
 	padding: 0px 0px 0px 0px;
 	float: right;
 }
 
 #conteiner {
-	width: 94%;
+	width: 100%;
 	margin: 0 auto;
 	display: block;
 	padding: 0px 0px 0px 0px;
-	border: 2px solid #cccccc;
+	border: 0px solid #cccccc;
 	background-color: #FFFFFF;
     
 }
@@ -157,7 +157,7 @@ label{
 
 #siteInfo{
 	clear: both;
-	border: 1px solid #cccccc;
+	border: 0px solid #cccccc;
 	font-size: 100%;
 	color:#0000af;
 	padding: 10px 10px 10px 10px;
