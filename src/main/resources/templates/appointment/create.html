@@ -8,66 +8,63 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
-
 </head>
 <body>
-
 <div class="vh-100 d-flex justify-content-center"
      style="background-image: url('/images/Kid-7.jpg'); background-size: cover;">
     <div class="col-md-8" align="center">
 
-<br/><br/><br/><br/>
-<h1>Create New Appointment</h1>
-<br/><br/>
+        <br/><br/><br/><br/>
+        <h1>Create New Appointment</h1>
+        <br/><br/>
 
-<form action="#" th:action="@{/appointment/create}" method="post" th:object="${appointment}">
+        <form action="#" th:action="@{/appointment/create}" method="post" th:object="${appointment}">
 
-  <p>Doctor:
-    <select th:field="*{doctor}">
-      <option th:each="d : ${doctors}"
-              th:value="${d.id}"
-              th:text="${d.firstName} + ' ' + ${d.lastName} + ': ' + ${d.specialty}">
-      </option>
-    </select>
-  </p>
+            <p>Doctor:
+                <select th:field="*{doctor}">
+                    <option th:each="d : ${doctors}"
+                            th:value="${d.id}"
+                            th:text="${d.firstName} + ' ' + ${d.lastName} + ': ' + ${d.specialty}">
+                    </option>
+                </select>
+            </p>
 
-    <p>Examination:
-        <select th:field="*{examination}">
-            <option th:each="e : ${examinationList}"
-                    th:value="${e.value}"
-                    th:text="${e.value}">
-            </option>
-        </select>
-    </p>
+            <p>Examination:
+                <select th:field="*{examination}">
+                    <option th:each="e : ${examinationList}"
+                            th:value="${e.value}"
+                            th:text="${e.value}">
+                    </option>
+                </select>
+            </p>
 
-<p>Day:
-   <select th:field="*{myDate}">
-       <option th:each="a : ${days}"
-              th:value="${a}"
-              th:text="${a}">
-      </option>
+            <p>Day:
+                <select th:field="*{myDate}">
+                    <option th:each="a : ${days}"
+                            th:value="${a}"
+                            th:text="${a}">
+                    </option>
 
-    </select>
-  </p>
-  <p>Hour:
-    <select th:field="*{myTime}">
-     <option th:each="h : ${hours}"
-              th:value="${h}"
-              th:text="${h}">
-      </option>
-    </select>
-  </p>
+                </select>
+            </p>
+            <p>Hour:
+                <select th:field="*{myTime}">
+                    <option th:each="h : ${hours}"
+                            th:value="${h}"
+                            th:text="${h}">
+                    </option>
+                </select>
+            </p>
 
-    <br/>
-  <p><input class="btn btn-primary" type="submit" value="Save appointment"></p>
-    <br/>
+            <br/>
+            <p><input class="btn btn-primary" type="submit" value="Save appointment"></p>
+            <br/>
 
-    <span th:utext="${successMessage}" style="color:red"></span>
+            <span th:utext="${successMessage}" style="color:red"></span>
 
-</form>
+        </form>
 
+    </div>
 </div>
-</div>
-
 </body>
 </html>

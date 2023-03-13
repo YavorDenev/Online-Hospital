@@ -8,9 +8,15 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
-
+<div id="masthead">
+    <div id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="95"/></a></div>
+    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png" height="95"/></a></div>
+    <div id="siteName">YAVOR & TURHAN Medica</div>
+</div>
+<div id="conteiner" align="center">
 <h2>Grouping patients by date</h2>
 
     <br/>
@@ -33,6 +39,7 @@
     </tr>
     </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>

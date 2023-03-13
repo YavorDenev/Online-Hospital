@@ -1,7 +1,7 @@
 @media screen{
 body{
 	font-family: Arial,sans-serif;
-	color: #333333;
+	color: #000000;
 	line-height: 1.5;
 	margin: 0px;
 	padding: 0px;
@@ -30,13 +30,13 @@ h1, h2, h3, h4, h5, h6 {
 
 h1{
  font-family: Arial,sans-serif,Verdana;
- font-size: 150%;
+ font-size: 200%;
  color: #334d55;
 
  }
 
 h2{
- font-size: 130%;
+ font-size: 150%;
  color: #334d55;
 }
 
@@ -48,7 +48,7 @@ h3{
 h4{
  font-size: 100%;
  font-weight: normal;
- color: #006600;
+ color: #0000af;
 }
 
 h5{
@@ -57,11 +57,14 @@ h5{
 }
 
 ul{
- list-style-type: square;
+ list-style-type: none;
 }
-
+li{
+color: #0000af;
+}
+}
 ul ul{
- list-style-type: disc;
+ list-style-type: none;
 }
 
 ul ul ul{
@@ -109,11 +112,10 @@ label{
 }
 
 #conteiner {
-	width: 90%;
+	width: 94%;
 	margin: 0 auto;
 	display: block;
 	padding: 0px 0px 0px 0px;
-	margin:0 auto;
 	border: 2px solid #cccccc;
 	background-color: #FFFFFF;
     
@@ -150,7 +152,7 @@ label{
 }
 
 #content a/*, a:visited, a:hover*/{     
-     color: #009900;
+     color: #0000af;
 	 text-decoration: none;}
 
 #siteInfo{
@@ -232,7 +234,7 @@ text-align:justify;
 
 .story p{
 	padding: 10px 10px 10px 10px;
-	text-align:justfied;
+	text-align: justfied;
 }
 .story img{
 	float: left;
@@ -319,7 +321,7 @@ font-size:80%;}
 }
 #reklama a:link, a:visited, a:hover{
      /*display: block; */
-     color: #009900;
+     color: #0000af;
 	 text-decoration: none;
 	 img-border:0px;
 	 }

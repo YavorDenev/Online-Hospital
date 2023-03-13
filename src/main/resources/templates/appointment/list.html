@@ -14,7 +14,8 @@
 <body>
 <div id="masthead">
     <div id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="95"/></a></div>
-    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png" height="95"/></a></div>
+    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png"
+                                                                               height="95"/></a></div>
     <div id="siteName">YAVOR & TURHAN Medica</div>
 </div>
 <div id="conteiner" align="center">
@@ -25,52 +26,49 @@
         <br>
 
         <p></p>
-            <table class="table table-bordered" >
-                <thead>
-                <tr class="table-light">
-                    <th>Id</th>
-                    <th>Doctors First Name</th>
-                    <th>Doctors Last Name</th>
-                    <th>Specialty</th>
-                    <th>Type of examination</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th></th>
-                    <th></th>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="table-light">
+                <th>Id</th>
+                <th>Doctors First Name</th>
+                <th>Doctors Last Name</th>
+                <th>Specialty</th>
+                <th>Type of examination</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th></th>
+                <th></th>
 
-                </tr>
-                </thead>
+            </tr>
+            </thead>
 
-                <tbody>
-                <tr class="table-active" th:each="xxx : ${appointmentList}">
-                    <td th:text="${xxx.id}"></td>
-                    <td th:text="${xxx.doctor.firstName}"></td>
-                    <td th:text="${xxx.doctor.lastName}"></td>
-                    <td th:text="${xxx.doctor.specialty}"></td>
-                    <td th:text="${xxx.examination}"></td>
-                    <td th:text="${xxx.myDate}"></td>
-                    <td th:text="${xxx.myTime}"></td>
+            <tbody>
+            <tr class="table-active" th:each="xxx : ${appointmentList}">
+                <td th:text="${xxx.id}"></td>
+                <td th:text="${xxx.doctor.firstName}"></td>
+                <td th:text="${xxx.doctor.lastName}"></td>
+                <td th:text="${xxx.doctor.specialty}"></td>
+                <td th:text="${xxx.examination}"></td>
+                <td th:text="${xxx.myDate}"></td>
+                <td th:text="${xxx.myTime}"></td>
 
-                    <td>
-                        <form th:action="@{/appointment/edit/{appointmentId}(appointmentId=${xxx.id})}"method="get">
-                            <input class="btn btn-success" type="submit" value="Change date, time">
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{/appointment/delete/{appointmentId}(appointmentId=${xxx.id})}" method="post">
-                            <input class="btn btn-danger" type="submit" value="Refuse this appointment">
-                        </form>
-                    </td>
+                <td>
+                    <form th:action="@{/appointment/edit/{appointmentId}(appointmentId=${xxx.id})}" method="get">
+                        <input class="btn btn-success" type="submit" value="Change date, time">
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/appointment/delete/{appointmentId}(appointmentId=${xxx.id})}" method="post">
+                        <input class="btn btn-danger" type="submit" value="Refuse this appointment">
+                    </form>
+                </td>
 
-                </tr>
-                </tbody>
-            </table>
+            </tr>
+            </tbody>
+        </table>
         </p>
         <a th:href="@{/}">Back to main menu</a>
     </div>
-    </div>
-<div id="siteInfo"> The site created as final project to "Digital Razgrad Course" by Yavor Denev and Turhan
-    Syuleymanov.
 </div>
 </body>
 </html>

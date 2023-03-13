@@ -1,72 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Appointments list</title>
-  <script src=https://code.jquery.com/jquery-3.6.0.js></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Appointments list</title>
+    <script src=https://code.jquery.com/jquery-3.6.0.js></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 <body>
-  <div class="col-md-9" align="center">
+<div id="masthead">
+    <div id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="95"/></a></div>
+    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png"
+                                                                               height="95"/></a></div>
+    <div id="siteName">YAVOR & TURHAN Medica</div>
+</div>
+<div id="conteiner" align="center">
+    <div class="col-md-9" align="center">
+        <h2>Appointments list for doctor
+            <a th:text="' ' + ${doctorInfo}"></a>
+        </h2>
 
-  <h2>Appointments list for doctor
-      <a th:text="' ' + ${doctorInfo}"></a>
-  </h2>
+        <br/>
+        <a th:href="@{/}">Back to main menu</a>
+        <br/>
 
-  <br/>
-  <a th:href="@{/}">Back to main menu</a>
-  <br/>
+        <p></p>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="table-light">
+                <th>Appointment Id</th>
 
-  <p></p>
-  <table class="table table-bordered" >
-    <thead>
-    <tr class="table-light">
-      <th>Appointment Id</th>
+                <th>Patient Id</th>
+                <th>Patient Last Name</th>
+                <th>Patient First Name</th>
+                <th>Patient Age</th>
 
-      <th>Patient Id</th>
-      <th>Patient Last Name</th>
-      <th>Patient First Name</th>
-      <th>Patient Age</th>
+                <!--      <th>Doctor Id</th>-->
+                <!--      <th>Doctor Names</th>-->
+                <!--      <th>Doctor First Name</th>-->
+                <!--      <th>Doctor Last Name</th>-->
+                <!--      <th>Specialty</th>-->
 
-<!--      <th>Doctor Id</th>-->
-<!--      <th>Doctor Names</th>-->
-<!--      <th>Doctor First Name</th>-->
-<!--      <th>Doctor Last Name</th>-->
-<!--      <th>Specialty</th>-->
+                <th>Type of examination</th>
+                <th>Date</th>
+                <th>Time</th>
 
-      <th>Type of examination</th>
-      <th>Date</th>
-      <th>Time</th>
+            </tr>
+            </thead>
 
-    </tr>
-    </thead>
+            <tbody>
+            <tr class="table-active" th:each="xxx : ${appointmentList}">
+                <td th:text="${xxx.id}"></td>
 
-    <tbody>
-    <tr class="table-active" th:each="xxx : ${appointmentList}">
-      <td th:text="${xxx.id}"></td>
+                <td th:text="${xxx.patient.id}"></td>
+                <td th:text="${xxx.patient.lastName}"></td>
+                <td th:text="${xxx.patient.firstName}"></td>
+                <td th:text="${xxx.patient.age}"></td>
 
-      <td th:text="${xxx.patient.id}"></td>
-      <td th:text="${xxx.patient.lastName}"></td>
-      <td th:text="${xxx.patient.firstName}"></td>
-      <td th:text="${xxx.patient.age}"></td>
+                <!--      <td th:text="${xxx.doctor.id}"></td>-->
+                <!--      <td th:text="${xxx.doctor.firstName} + ' ' + ${xxx.doctor.lastName}"></td>-->
+                <!--      <td th:text="${xxx.doctor.firstName}"></td>-->
+                <!--      <td th:text="${xxx.doctor.lastName}"></td>-->
+                <!--      <td th:text="${xxx.doctor.specialty}"></td>-->
 
-<!--      <td th:text="${xxx.doctor.id}"></td>-->
-<!--      <td th:text="${xxx.doctor.firstName} + ' ' + ${xxx.doctor.lastName}"></td>-->
-<!--      <td th:text="${xxx.doctor.firstName}"></td>-->
-<!--      <td th:text="${xxx.doctor.lastName}"></td>-->
-<!--      <td th:text="${xxx.doctor.specialty}"></td>-->
+                <td th:text="${xxx.examination}"></td>
+                <td th:text="${xxx.myDate}"></td>
+                <td th:text="${#strings.substring(xxx.myTime,0,5)}"></td>
 
-      <td th:text="${xxx.examination}"></td>
-      <td th:text="${xxx.myDate}"></td>
-      <td th:text="${#strings.substring(xxx.myTime,0,5)}"></td>
+            </tr>
+            </tbody>
+        </table>
 
-    </tr>
-    </tbody>
-  </table>
-
+    </div>
 </div>
 </body>
 </html>
