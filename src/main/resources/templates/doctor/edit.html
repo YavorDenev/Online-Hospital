@@ -4,9 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit doctor</title>
+    <script src=https://code.jquery.com/jquery-3.6.0.js></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
 </head>
+<body>
+
+<div class="vh-100 d-flex justify-content-center"
+     style="background-image: url('/images/Kid-7.jpg'); background-size: cover;">
+    <div class="col-md-8" align="center">
+
+        <br/><br/><br/><br/>
+        <h2>Edit doctor</h2><br/>
+        <br/><br/>
+
 <form th:action="@{/doctor/edit}" th:object="${doctor}" method="post">
-    <h2>Edit doctor</h2><br/>
 
     <input type="hidden" th:field="*{id}">
     <input type="hidden" th:field="*{user}">
@@ -29,9 +43,10 @@
             </option>
         </select>
         <span th:if="${#fields.hasErrors('specialty')}" th:errors="*{specialty}" style="color:red">password error</span><br/><br/>
-    </p><br/>
+    </p>
 
-    <button type="submit">Edit doctor</button>
+    <br/>
+    <button class="btn btn-primary" type="submit">Edit doctor</button>
     <br/>
     <br/>
     <br/>
@@ -43,5 +58,9 @@
     <span th:utext="${successMessage}"></span>
 
 </form>
+
+</div>
+</div>
+
 </body>
 </html>
