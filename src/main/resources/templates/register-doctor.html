@@ -2,10 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Register doctor</title>
+  <script src=https://code.jquery.com/jquery-3.6.0.js></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
 </head>
 <body>
+
+<div class="vh-100 d-flex justify-content-center"
+     style="background-image: url('/images/Kid-7.jpg'); background-size: cover;">
+  <div class="col-md-8" align="center">
+
+
 <form th:action="@{/register-doctor}" th:object="${doctorReg}" method="post">
+
+
+  <br/><br/><br/>
   <h2>Register new doctor</h2><br/>
+  <br/><br/>
+
 
   <p>Username:
     <input type="text" th:field="*{username}" placeholder="Username" minlength="5" maxlength="30" required/>
@@ -49,5 +65,9 @@
   <span th:utext="${successMessage}"></span>
 
 </form>
+
+</div>
+</div>
+
 </body>
 </html>
