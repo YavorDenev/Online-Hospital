@@ -8,8 +8,16 @@
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
 </head>
 <body>
+<div id="masthead">
+    <div id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="95"/></a></div>
+    <div id="logo1"><a href="https://digitalrazgrad.org/" target="_blank"><img src="/images/digital-razgrad-logo.png" height="95"/></a></div>
+    <div id="siteName">YAVOR & TURHAN Medica</div>
+</div>
+<div id="conteiner" align="center">
     <div class="col-md-10" align="center">
         <h2>My appointments list</h2>
 
@@ -60,5 +68,9 @@
         </p>
         <a th:href="@{/}">Back to main menu</a>
     </div>
+    </div>
+<div id="siteInfo"> The site created as final project to "Digital Razgrad Course" by Yavor Denev and Turhan
+    Syuleymanov.
+</div>
 </body>
 </html>
