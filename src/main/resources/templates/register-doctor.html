@@ -50,8 +50,11 @@
                                 th:text="${yyy.value}">
                         </option>
                     </select>
-    <span th:if="${#fields.hasErrors('specialty')}" th:errors="*{specialty}" style="color:red">password error</span><br/><br/>
+    <span th:if="${#fields.hasErrors('specialty')}" th:errors="*{specialty}" style="color:red">password error</span>
   </p><br/>
+
+  <span th:utext="${successMessage}" style="color:red"></span>
+  <br/> <br/><br/>
 
   <button class="btn btn-primary" type="submit">Register</button>
   <br/>
@@ -60,9 +63,6 @@
 
   <a th:href="@{/}">Back to main menu</a></a>
   <br/>
-  <br/>
-
-  <span th:utext="${successMessage}"></span>
 
 </form>
 

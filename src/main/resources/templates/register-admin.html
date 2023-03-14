@@ -13,44 +13,40 @@
 
     <div class="vh-100 d-flex justify-content-center"
          style="background-image: url('/images/Kid-7.jpg'); background-size: cover;">
-        <div class="col-md-11"  align="center">
+        <div class="col-md-11" align="center">
 
-        <br/><br/><br/>
-        <h2>Register Admin</h2><br/>
-        <br/><br/><br/>
+            <br/><br/><br/>
+            <h2>Register Admin</h2><br/>
+            <br/><br/><br/>
 
-    <p>Username:
-        <input type="text" th:field="*{username}" placeholder="Username" minlength="5" maxlength="30" required/>
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:red">username error</span>
-    </p><br/>
+            <p>Username:
+                <input type="text" th:field="*{username}" placeholder="Username" minlength="5" maxlength="30" required/>
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
+                      style="color:red">username error</span>
+            </p><br/>
 
-    <p>Password:
-        <input type="password" th:field="*{password}" placeholder="Password" minlength="5" maxlength="30" required/>
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:red">password error</span><br/><br/>
-    </p><br/>
+            <p>Password:
+                <input type="password" th:field="*{password}" placeholder="Password" minlength="5" maxlength="30"
+                       required/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                      style="color:red">password error</span><br/><br/>
+            </p>
 
-<!--    <p>Select role:-->
-<!--        <select th:field="*{role}" required>-->
-<!--            <option value="">Select</option>-->
-<!--            <option value="ROLE_PATIENT">ROLE_PATIENT</option>-->
-<!--            <option value="ROLE_DOCTOR">ROLE_DOCTOR</option>-->
-<!--            <option value="ROLE_ADMIN">ROLE_ADMIN</option>-->
-<!--        </select>-->
-<!--    </p><br/>-->
+            <span th:utext="${successMessage}" style="color:red"></span>
+            <br/>
+            <br/>
 
-    <button class="btn btn-primary" type="submit">Register</button>
-    <br/>
-    <br/>
-    <br/>
+            <button class="btn btn-primary" type="submit">Register</button>
+            <br/>
+            <br/>
+            <br/>
 
-    <a th:href="@{/}">Back to main menu</a></a>
-    <br/>
-    <br/>
+            <a th:href="@{/}">Back to main menu</a></a>
+            <br/>
+            <br/>
 
-    <span th:utext="${successMessage}"></span>
-
-    </div>
-    <div class="mt-auto p-2" id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="120"/></a></div>
+        </div>
+        <div class="mt-auto p-2" id="logo"><a th:href="@{/}"><img src="/images/logo.png" height="120"/></a></div>
     </div>
 </form>
 </body>

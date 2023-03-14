@@ -58,6 +58,7 @@ public class AuthController {
 
     @RequestMapping(value = {"/register-doctor"}, method = RequestMethod.POST)
     public String registerUserAsDoctor(Model model, @Valid DoctorReg doctorReg, BindingResult bindingResult){
+        model.addAttribute("specialtyList", Specialty.values());
         if(bindingResult.hasErrors()){
             model.addAttribute("successMessage", "User not registered!");
             return "register-doctor";

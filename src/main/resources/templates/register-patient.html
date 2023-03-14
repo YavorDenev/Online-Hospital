@@ -46,15 +46,16 @@
   <p>Age:
     <input type="number" th:field="*{age}" placeholder="age" min=0 max=100 required/>
     <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}" style="color:red">password error</span><br/><br/>
-  </p><br/>
+  </p>
 
+  <span th:utext="${successMessage}" style="color:red"></span>
+  <br/><br/>
 
   <button class="btn btn-primary" type="submit">Register</button><br/><br/>
 
   <br/>
   <a th:href="@{|/login|}" th:text="'Back to Login page'"></a><br/><br/>
 
-  <span th:utext="${successMessage}"></span>
 </form>
 
 </div>
