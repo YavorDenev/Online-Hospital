@@ -1,4 +1,5 @@
 package DigRz.OnlineHospital.unit;
+
 import DigRz.OnlineHospital.constants.Specialty;
 import DigRz.OnlineHospital.entities.Appointment;
 import DigRz.OnlineHospital.entities.Doctor;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -29,6 +29,7 @@ public class GroupingServiceTests {
         MockitoAnnotations.openMocks(this);
         //this.initialSetup();
     }
+
     @Mock
     AppointmentRepository appointmentRepository;
 
@@ -48,8 +49,6 @@ public class GroupingServiceTests {
     @InjectMocks
     Patient patient2;
     @InjectMocks
-    Patient patient3;
-    @InjectMocks
     Appointment appointment1;
     @InjectMocks
     Appointment appointment2;
@@ -62,28 +61,28 @@ public class GroupingServiceTests {
 
     @Test
     public void testFindPatientsByDate() {
-        // Arrange
-        String today = "2023-03-08";
-        appointment1.setMyDate(today);
-        appointment2.setMyDate(today);
-        appointment3.setMyDate(today);
-        appointment4.setMyDate("2023-03-07");
+        String day1 = "2023-03-08";
+        String day2 = "2023-03-07";
+        appointment1.setMyDate(day1);
+        appointment2.setMyDate(day1);
+        appointment3.setMyDate(day1);
+        appointment4.setMyDate(day2);
         appointment1.setPatient(patient1);
         appointment2.setPatient(patient2);
         appointment3.setPatient(patient1);
         appointment4.setPatient(patient1);
-        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1,appointment2,appointment3,appointment4));
+        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1, appointment2, appointment3, appointment4));
 
         when(appointmentRepository.findAll()).thenReturn(appointments);
 
-        Set<Patient> patients = groupingService.findPatientsByDate(today.toString());
+        Set<Patient> patients = groupingService.findPatientsByDate(day1);
 
         assertEquals(2, patients.size());
     }
 
     @Test
     public void testFindPatientsCountByDate() {
-        LocalDate day1 = LocalDate.parse("2023-03-08") ;
+        LocalDate day1 = LocalDate.parse("2023-03-08");
         LocalDate day2 = LocalDate.parse("2023-03-07");
         appointment1.setMyDate(day1.toString());
         appointment2.setMyDate(day1.toString());
@@ -93,7 +92,7 @@ public class GroupingServiceTests {
         appointment2.setPatient(patient2);
         appointment3.setPatient(patient1);
         appointment4.setPatient(patient1);
-        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1,appointment2,appointment3,appointment4));
+        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1, appointment2, appointment3, appointment4));
 
         when(appointmentRepository.findAll()).thenReturn(appointments);
         List<LocalDate> days = new ArrayList<>();
@@ -108,15 +107,9 @@ public class GroupingServiceTests {
 
     @Test
     public void testFindPatientsByDepartment() {
-        LocalDate day1 = LocalDate.parse("2023-03-08") ;
-        LocalDate day2 = LocalDate.parse("2023-03-07");
         doctor1.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor2.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor3.setSpecialty(Specialty.DERMATOLOGY.name());
-        appointment1.setMyDate(day1.toString());
-        appointment2.setMyDate(day1.toString());
-        appointment3.setMyDate(day1.toString());
-        appointment4.setMyDate(day2.toString());
         appointment1.setPatient(patient1);
         appointment2.setPatient(patient2);
         appointment3.setPatient(patient1);
@@ -125,7 +118,7 @@ public class GroupingServiceTests {
         appointment2.setDoctor(doctor1);
         appointment3.setDoctor(doctor2);
         appointment4.setDoctor(doctor3);
-        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1,appointment2,appointment3,appointment4));
+        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1, appointment2, appointment3, appointment4));
 
         when(appointmentRepository.findAll()).thenReturn(appointments);
         EnumMap<Specialty, HashSet<Patient>> patientsByDepartment = groupingService.findPatientsByDepartment();
@@ -136,15 +129,9 @@ public class GroupingServiceTests {
 
     @Test
     public void testFindPatientsCountByDepartment() {
-    LocalDate day1 = LocalDate.parse("2023-03-08") ;
-    LocalDate day2 = LocalDate.parse("2023-03-07");
         doctor1.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor2.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor3.setSpecialty(Specialty.DERMATOLOGY.name());
-        appointment1.setMyDate(day1.toString());
-        appointment2.setMyDate(day1.toString());
-        appointment3.setMyDate(day1.toString());
-        appointment4.setMyDate(day2.toString());
         appointment1.setPatient(patient1);
         appointment2.setPatient(patient2);
         appointment3.setPatient(patient1);
@@ -153,7 +140,7 @@ public class GroupingServiceTests {
         appointment2.setDoctor(doctor1);
         appointment3.setDoctor(doctor2);
         appointment4.setDoctor(doctor3);
-        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1,appointment2,appointment3,appointment4));
+        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1, appointment2, appointment3, appointment4));
 
         when(appointmentRepository.findAll()).thenReturn(appointments);
         Map<String, Integer> patientsCountByDepartment = groupingService.findPatientsCountByDepartment();
@@ -163,18 +150,12 @@ public class GroupingServiceTests {
 
     @Test
     public void testFindPatientsByDoctor() {
-        LocalDate day1 = LocalDate.parse("2023-03-08") ;
-        LocalDate day2 = LocalDate.parse("2023-03-07");
         doctor1.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor2.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor3.setSpecialty(Specialty.DERMATOLOGY.name());
         doctor1.setId(1L);
         doctor2.setId(2L);
         doctor3.setId(3L);
-        appointment1.setMyDate(day1.toString());
-        appointment2.setMyDate(day1.toString());
-        appointment3.setMyDate(day1.toString());
-        appointment4.setMyDate(day2.toString());
         appointment1.setPatient(patient1);
         appointment2.setPatient(patient2);
         appointment3.setPatient(patient1);
@@ -183,7 +164,7 @@ public class GroupingServiceTests {
         appointment2.setDoctor(doctor1);
         appointment3.setDoctor(doctor2);
         appointment4.setDoctor(doctor3);
-        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1,appointment2,appointment3,appointment4));
+        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1, appointment2, appointment3, appointment4));
 
         when(appointmentRepository.findAll()).thenReturn(appointments);
         Set<Patient> patients = groupingService.findPatientsByDoctor(1L);
@@ -195,18 +176,12 @@ public class GroupingServiceTests {
 
     @Test
     public void testFindPatientsCountByDoctor() {
-        LocalDate day1 = LocalDate.parse("2023-03-08") ;
-        LocalDate day2 = LocalDate.parse("2023-03-07");
         doctor1.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor2.setSpecialty(Specialty.CARDIOLOGY.name());
         doctor3.setSpecialty(Specialty.DERMATOLOGY.name());
         doctor1.setId(1L);
         doctor2.setId(2L);
         doctor3.setId(3L);
-        appointment1.setMyDate(day1.toString());
-        appointment2.setMyDate(day1.toString());
-        appointment3.setMyDate(day1.toString());
-        appointment4.setMyDate(day2.toString());
         appointment1.setPatient(patient1);
         appointment2.setPatient(patient2);
         appointment3.setPatient(patient1);
@@ -215,8 +190,8 @@ public class GroupingServiceTests {
         appointment2.setDoctor(doctor1);
         appointment3.setDoctor(doctor2);
         appointment4.setDoctor(doctor3);
-        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1,appointment2,appointment3,appointment4));
-        List<Doctor> doctors = new ArrayList<>(Arrays.asList(doctor1,doctor2,doctor3));
+        List<Appointment> appointments = new ArrayList<>(Arrays.asList(appointment1, appointment2, appointment3, appointment4));
+        List<Doctor> doctors = new ArrayList<>(Arrays.asList(doctor1, doctor2, doctor3));
 
         when(doctorRepository.findAll()).thenReturn(doctors);
         when(appointmentRepository.findAll()).thenReturn(appointments);
