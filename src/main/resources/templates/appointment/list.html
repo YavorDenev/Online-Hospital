@@ -50,7 +50,7 @@
                 <td th:text="${xxx.doctor.specialty}"></td>
                 <td th:text="${xxx.examination}"></td>
                 <td th:text="${xxx.myDate}"></td>
-                <td th:text="${xxx.myTime}"></td>
+                <td th:text="${#strings.substring(xxx.myTime,0,5)}"></td>
 
                 <td>
                     <form th:action="@{/appointment/edit/{appointmentId}(appointmentId=${xxx.id})}" method="get">

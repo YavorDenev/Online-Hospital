@@ -56,7 +56,7 @@ public class GroupingService {
     public Map<String,Long> findPatientsCountByDate(){
         Map<String,Long> patientsCount = new LinkedHashMap<>();
 
-        for (LocalDate day:utils.generateListOfDays()) {
+        for (LocalDate day:utils.generateListOfDaysForGrouping()) {
             patientsCount.put(day.toString(),findPatientsByDate(day.toString()).stream().count());
         }
         return patientsCount;

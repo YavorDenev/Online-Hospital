@@ -11,9 +11,9 @@ import java.util.List;
 public class Utils {
 
     public List<LocalDate> generateListOfDays() {
-        LocalDate startDay = LocalDate.now().plusDays(15);
+        LocalDate startDay = LocalDate.now().plusDays(7);
         List<LocalDate> daysList = new ArrayList<>();
-        for (int i = 0; i < 14; i++) {     //за период от две седмици, начална дата - 15 дни напред от текущата
+        for (int i = 0; i < 21; i++) {     //за период от две седмици, начална дата - 15 дни напред от текущата
             daysList.add(startDay.plusDays(i));
         }
         return daysList;
@@ -26,6 +26,15 @@ public class Utils {
             if (i<6 || i>7) hoursList.add(startHour.plusMinutes(30*i));
         }
         return hoursList;
+    }
+
+    public List<LocalDate> generateListOfDaysForGrouping() {
+        LocalDate startDay = LocalDate.now().plusDays(1);
+        List<LocalDate> daysList = new ArrayList<>();
+        for (int i = 0; i < 27; i++) {     //за период от две седмици, начална дата - 15 дни напред от текущата
+            daysList.add(startDay.plusDays(i));
+        }
+        return daysList;
     }
 
 }
